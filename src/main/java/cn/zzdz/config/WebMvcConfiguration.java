@@ -2,14 +2,17 @@ package cn.zzdz.config;
 
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.CacheControl;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import cn.zzdz.component.MyLocaleResolver;
 
 //@SuppressWarnings("deprecation")
 @Configuration
@@ -26,5 +29,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 				.setCacheControl(CacheControl.maxAge(3650, TimeUnit.DAYS));
 		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/")
 				.setCacheControl(CacheControl.maxAge(3650, TimeUnit.DAYS));
+	}
+	@Bean
+	public LocaleResolver localeResolver() {
+		return new MyLocaleResolver();
 	}
 }

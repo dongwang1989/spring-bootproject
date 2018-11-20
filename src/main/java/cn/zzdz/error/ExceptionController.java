@@ -24,10 +24,6 @@ public class ExceptionController extends AbstractErrorController {// extends Abs
 	@Value("${server.error.path:${error.path:/error}}")
 	public String ERROR_PATH;// 注入的东西不能王final里加
 
-	// @Override
-	// public String getErrorPath() {
-	// return ERROR_PATH;
-	// }
 
 	@RequestMapping("/error")
 	public @ResponseBody ResponseEntity<Map<String, Object>> error(HttpServletRequest request, Exception exception)

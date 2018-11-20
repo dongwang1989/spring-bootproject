@@ -10,6 +10,7 @@ import org.springframework.security.web.context.SecurityContextRepository;
 
 import cn.zzdz.repository.ContentRepository;
 
+
 @Configuration
 @EnableWebSecurity // 代理 不可能 weishenme 优先于aop 编译 运行时 为什么spring spring的拦截器是个什么
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -25,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {// 如果是完全不受限制用这个，连解析都不解析，上面那个会做安全验证但是检查完不做限制
 		web.ignoring().antMatchers("/whoim2", "/favicon.ico", "/webjars/**", "/swagger-resources/**",
 				"/swagger-ui.html", "2/api-docs/**", "/GET/environment", "/ha", "/a.html", "/static/**", "/new/**",
-				"/denglu");
+				"/denglu","/exception/{param}","/GET/aa");
 		// "/cas/**", "/denglu", "/police/**", "/car/**", "/carin/**", "/carfin/**"
 	}
 
@@ -33,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public SecurityContextRepository createsecurity() {
 		return new ContentRepository();
 	}
+
 	// @Autowired
 	// public void configureGlobal(AuthenticationManagerBuilder auth) throws
 	// Exception {

@@ -7,6 +7,7 @@ public interface INotifyMessage extends IMessage {
 	@Override
 	public default String getEnumValue() {
 
+		//return  getName();
 		return IMessage.typ + getType() + "." + getName();
 	}
 }

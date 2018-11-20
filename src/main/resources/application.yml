@@ -6,19 +6,19 @@ spring:
       url: jdbc:mysql://172.17.1.56:3306/newwd?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=PRC&useSSL=false
       username: root
       password: 123456
-      
+
    jpa:
      database: MYSQL
      hibernate.ddl-auto: none 
      hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
      show-sql: true 
    profiles:
-     active: "profileActive"
+     active: dev
    messages:
-     always-use-message-format: false
-     basename: enums
-     cache-seconds: -1
+     basename: i18n.messages
+     cache-second: 3600
      encoding: UTF-8
+     always-use-message-format: false
      fallback-to-system-locale: true
 
 server:
@@ -27,6 +27,7 @@ server:
    
 logging.file: D:/data/mylog
 logging.path: myLog.log
+
 
      
      

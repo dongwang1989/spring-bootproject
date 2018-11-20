@@ -60,7 +60,7 @@ public class WebLogAspect {
 
 		while (enu.hasMoreElements()) {
 			String paraName = enu.nextElement();
-			System.out.println(paraName + ": " + request.getParameter(paraName));
+			//System.out.println(paraName + ": " + request.getParameter(paraName));
 		}
 
 	}
