@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {// 如果是完全不受限制用这个，连解析都不解析，上面那个会做安全验证但是检查完不做限制
 		web.ignoring().antMatchers("/whoim2", "/favicon.ico", "/webjars/**", "/swagger-resources/**",
 				"/swagger-ui.html", "2/api-docs/**", "/GET/environment", "/ha", "/a.html", "/static/**", "/new/**",
-				"/denglu","/exception/{param}","/GET/aa");
+				"/denglu","/exception/{param}","/test/**");
 		// "/cas/**", "/denglu", "/police/**", "/car/**", "/carin/**", "/carfin/**"
 	}
 
