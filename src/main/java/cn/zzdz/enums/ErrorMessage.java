@@ -23,7 +23,6 @@ public enum ErrorMessage implements INotifyMessage {
 //	}
 	@Override
 	public String getType() {
-		//
 		return "ErrorMessage"+ "." + this.name();
 		//return typ + "." + "ErrorMessage";
 	}
