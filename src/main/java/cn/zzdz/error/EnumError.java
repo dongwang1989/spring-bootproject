@@ -31,6 +31,15 @@ public class EnumError extends RuntimeException {
         values= MessageFormat.format(values,aa);
         System.out.println(values);
     }
+    public EnumError(INotifyMessage notifyMessage,final String ... param) {
+        MyLocaleResolver ft =new MyLocaleResolver();
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        Locale locale = ft.resolveLocale(request);
+        String mg=notifyMessage.getName();
+        values = MessageSourceHolder.getMessageSource().getMessage(mg, null, locale);
+        values= MessageFormat.format(values,param[0]);
+        System.out.println(values);
+    }
 //    public EnumError(final INotifyMessage message, final String... params) {
 //        MyLocaleResolver ft =new MyLocaleResolver();
 //        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
