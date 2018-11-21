@@ -141,7 +141,7 @@ public class UserController {
 
     @GetMapping("/GET/aa")
     public void getaa()  throws Exception{
-        new EnumError("ErrorMessage.INCORRECT_PASSWORD","ad");
+        //new EnumError("ErrorMessage.INCORRECT_PASSWORD","ad");
     }
 
 }
