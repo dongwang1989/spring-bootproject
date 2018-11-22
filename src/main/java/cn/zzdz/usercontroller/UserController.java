@@ -147,7 +147,6 @@ public class UserController {
     @GetMapping("/test/throwerror2")
     public void getaa2()  {
         throw  new RuntimeException("yup");
-        //new EnumError("ErrorMessage.INCORRECT_PASSWORD","ad");
     }
 
 }
