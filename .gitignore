@@ -5,3 +5,4 @@ target
 .apt_generated
 .settings
 /mm.txt
+static/*

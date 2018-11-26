@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7d01746f-a091-48de-9762-a05089f1c9f3" name="Default Changelist" comment="" />
+    <list default="true" id="7d01746f-a091-48de-9762-a05089f1c9f3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/zzdz/repository/ContentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/zzdz/repository/ContentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/zzdz/usercontroller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/zzdz/usercontroller/UserController.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -80,6 +87,16 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="1009267931">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FavoritesManager">
     <favorites_list name="spring-boot" />
@@ -132,8 +149,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/zzdz/error/EnumError.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="22" column="52" lean-forward="true" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
+            <state relative-caret-position="118">
+              <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -237,6 +254,30 @@
       <path value="$PROJECT_DIR$/src/main/resources/static/333/vendors/starrr/package.json" />
       <path value="$PROJECT_DIR$/src/main/resources/static/333/vendors/switchery/package.json" />
       <path value="$PROJECT_DIR$/src/main/resources/static/333/vendors/transitionize/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/Chart.js/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/DateJS/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/Flot/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/animate.css/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/autosize/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/bootstrap-daterangepicker/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/bootstrap-progressbar/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/bootstrap-wysiwyg/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/bootstrap/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/cropper/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/devbridge-autocomplete/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/echarts/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/eve/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/flot-spline/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/ion.rangeSlider/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/jquery-knob/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/jquery.easy-pie-chart/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/jqvmap/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/jszip/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/morris.js/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/select2/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/starrr/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/switchery/package.json" />
+      <path value="$PROJECT_DIR$/target/classes/static/333/vendors/transitionize/package.json" />
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
@@ -278,19 +319,19 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
             <path>
               <item name="spring-boot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="spring-boot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -301,11 +342,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542708455450" />
-    <property name="last_opened_file_path" value="D:/ideaproject/bigdatasoft" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -346,6 +387,8 @@
       <workItem from="1542605745521" duration="18488000" />
       <workItem from="1542632743402" duration="31246000" />
       <workItem from="1542707802364" duration="875000" />
+      <workItem from="1542809468850" duration="47000" />
+      <workItem from="1542809542211" duration="244000" />
     </task>
     <task id="LOCAL-00001" summary="123">
       <created>1542704589916</created>
@@ -372,7 +415,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79835000" />
+    <option name="totallyTimeSpent" value="80126000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -386,7 +429,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" x="792" y="59" width="335" height="922" id="Project" order="0" sideWeight="0.49838188" visible="true" weight="0.18017058" />
+      <window_info content_ui="combo" x="792" y="59" width="335" height="922" id="Project" order="0" sideWeight="0.49838188" visible="true" weight="0.18336888" />
       <window_info id="Structure" order="1" sideWeight="0.50161815" side_tool="true" weight="0.1684435" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -403,7 +446,7 @@
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49840087" weight="0.3286334" />
       <window_info anchor="bottom" id="Spring" order="7" sideWeight="0.4989339" weight="0.329718" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49946696" weight="0.3286334" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5010661" side_tool="true" visible="true" weight="0.4121475" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="9" sideWeight="0.5010661" side_tool="true" visible="true" weight="0.4121475" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.329718" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" sideWeight="0.4989339" weight="0.329718" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
@@ -541,12 +584,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/messages_en_US.properties">
-      <provider editor-type-id="ResourceBundle" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
           <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
         </state>
       </provider>
+      <provider editor-type-id="ResourceBundle" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev.yml">
       <provider selected="true" editor-type-id="text-editor">
@@ -556,12 +599,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/messages.properties">
-      <provider editor-type-id="ResourceBundle" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
           <caret line="1" column="37" selection-start-line="1" selection-start-column="37" selection-end-line="1" selection-end-column="37" />
         </state>
       </provider>
+      <provider editor-type-id="ResourceBundle" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/zzdz/interfaces/service/IUserService.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -585,12 +628,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/i18n/messages_zh_CN.properties">
-      <provider editor-type-id="ResourceBundle" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
           <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
+      <provider editor-type-id="ResourceBundle" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/zzdz/config/SystemConfiguration.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -860,8 +903,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/zzdz/error/EnumError.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="22" column="52" lean-forward="true" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
+        <state relative-caret-position="118">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

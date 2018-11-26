@@ -31,7 +31,6 @@ public class EnumError extends RuntimeException {
         String mg=notifyMessage.getName();
         values = MessageSourceHolder.getMessageSource().getMessage(mg, null, locale);
         values= MessageFormat.format(values,param);
-        System.out.println(values);
     }
     @Override
     public String getMessage() {

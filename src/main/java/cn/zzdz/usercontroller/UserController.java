@@ -45,11 +45,13 @@ public class UserController {
 
     @PostMapping("/login") // (value="/login", method = RequestMethod.POST, consumes = "application/json")
     public ResultDto log(@RequestBody UserDto userdtolog, HttpSession session) {
+        System.out.println("12");
         return userService.getUser(userdtolog, session);
     }
 
     @RequestMapping("/denglu")
     public String denglu(@RequestParam String username, @RequestParam String pwd, HttpSession session) {
+        System.out.println(username);
         return userService.denglu(username, pwd, session);
     }
 
@@ -108,8 +110,6 @@ public class UserController {
     @Resource
     private MessageSource messageSource;
 
-//    @Autowired
-//    private MyLocaleResolver localea;
     @RequestMapping("/exception/checked")
     public void checkedException(HttpServletRequest httpServletRequest) throws Exception {
         throw new Error(ErrorMessage.INCORRECT_PASSWORD);
@@ -142,12 +142,10 @@ public class UserController {
     @GetMapping("/test/throwerror")
     public void getaa()  throws Exception{
         throw  new EnumError(ErrorMessage.INCORRECT_PASSWORD,"ad");
-        //new EnumError("ErrorMessage.INCORRECT_PASSWORD","ad");
     }
     @GetMapping("/test/throwerror2")
     public void getaa2()  {
         throw  new RuntimeException("yup");
-        //wde
     }
 
 }

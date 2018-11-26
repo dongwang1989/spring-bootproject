@@ -19,6 +19,7 @@ import cn.zzdz.interfaces.service.IUserService;
 import cn.zzdz.service.impl.AuthorityImpl;
 
 public class ContentRepository implements SecurityContextRepository {
+
 	@Autowired
 	private IUserService userService;
 

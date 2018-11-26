@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
+import cn.zzdz.error.EnumError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -64,7 +65,7 @@ public class UserServiceImpl implements IUserService {
 		return resultDto;
 	}
 
-	@SuppressWarnings("null")
+
 	@Override
 	public ResultDto getUser(UserDto userDtolog, HttpSession session) {
 		ResultDto resultDto = new ResultDto();
@@ -166,10 +167,8 @@ public class UserServiceImpl implements IUserService {
 			session.setAttribute("username", listuser.get(0).getUsername());
 			val = "1";
 		} else {
-			throw new Error(ErrorMessage.INCORRECT_PASSWORD, username);
-			// resultDto.setResult("登陆error");
+			throw  new EnumError(ErrorMessage.INCORRECT_PASSWORD,username);
 		}
-
 		return val;
 	}
 
