@@ -6,4 +6,4 @@ target
 .settings
 /mm.txt
 static/**
-/src/main/resources/static
+
