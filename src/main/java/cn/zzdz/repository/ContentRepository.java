@@ -29,10 +29,10 @@ public class ContentRepository implements SecurityContextRepository {
 		HttpSession session = requestResponseHolder.getRequest().getSession();
 		SecurityContext getcontext;
 		if (session == null || session.getAttribute("username") == null) {
-			System.out.println("123");
+			//System.out.println("123");
 			getcontext = generateNewContext();
 		} else {
-			System.out.println("333");
+			//System.out.println("333");
 			// Authenticatio 令牌存信息用
 			// Collections.emptyList();//kong list readonly not addd yanjinxiefa
 			// Collections.unmodifiableList(list)//set readonly not change quanjuyingyong
