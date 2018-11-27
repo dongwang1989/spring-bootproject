@@ -1,13 +1,11 @@
 package cn.zzdz.error;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.boot.web.servlet.error.ErrorController;
+import cn.zzdz.dto.ExceptionDto;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.zzdz.dto.ExceptionDto;
+import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice // 给controller用的aop 所有controller
 @ResponseBody
@@ -38,6 +36,4 @@ public class GlobalExceptionHandler{
 		exceptiondto.setErrorclass(exception.getClass());
 		return exceptiondto;
 	}
-	//EnumError
-
 }
