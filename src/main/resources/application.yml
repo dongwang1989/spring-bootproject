@@ -25,7 +25,7 @@ spring:
 server:
    error:
      path: /error 
-   port: 8888
+   port: 8080
 logging.file: D:/data/mylog
 logging.path: myLog.log
 
