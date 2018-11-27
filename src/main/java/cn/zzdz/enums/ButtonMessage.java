@@ -5,13 +5,13 @@ import cn.zzdz.interfaces.enummessage.IMessage;
 public enum ButtonMessage implements IMessage {
 	BUTTON_PASSWORD;
 	@Override
-	public String getType() {
-		return "BUTTONMESSAGE";
+	public String getName() {
+		return getType() + "." + this.name();
 	}
 
 	@Override
-	public String getName() {
-		return this.name();
+	public String getEnumValue() {
+		return typ + "." + getType();
 	}
 
 }

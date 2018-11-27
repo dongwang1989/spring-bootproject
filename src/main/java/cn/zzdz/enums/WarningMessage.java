@@ -6,13 +6,13 @@ public enum WarningMessage implements IMessage {
 	CONTROLLER_TESTA;
 
 	@Override
-	public String getType() {
-		return "WarningMessage";
+	public String getName() {
+		return getType() + "." + this.name();
 	}
 
 	@Override
-	public String getName() {
-		return this.name();
+	public String getEnumValue() {
+		return typ + "." + getType();
 	}
 
 }
