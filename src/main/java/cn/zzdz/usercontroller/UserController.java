@@ -73,7 +73,6 @@ public class UserController {
 
     @RequestMapping("/loginout")
     public ResultDto logout(HttpSession session) {
-        "".equals("");
         return userService.logout(session);
     }
 
@@ -107,6 +106,7 @@ public class UserController {
     public ResultDto getHello(@PathVariable String param) {
         return userService.getHello(param);
     }
+
     @Resource
     private MessageSource messageSource;
 
@@ -117,7 +117,6 @@ public class UserController {
 
     @RequestMapping("/ha")
     public List<User> ha(@RequestParam String username) {
-        System.out.println(username);
         return userService.Likenames(username);
     }
 
@@ -135,17 +134,14 @@ public class UserController {
     }
 
 
-
-
-
-
     @GetMapping("/test/throwerror")
-    public void getaa()  throws Exception{
-        throw  new EnumError(ErrorMessage.INCORRECT_PASSWORD,"ad");
+    public void getaa() throws Exception {
+        throw new EnumError(ErrorMessage.INCORRECT_PASSWORD, "ad");
     }
+
     @GetMapping("/test/throwerror2")
-    public void getaa2()  {
-        throw  new RuntimeException("yup");
+    public void getaa2() {
+        throw new RuntimeException("yup");
     }
 
 }

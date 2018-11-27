@@ -1,13 +1,8 @@
 package cn.zzdz.interfaces.enummessage;
 
 public interface INotifyMessage extends IMessage {
+	Class<?> c = INotifyMessage.class;
 
-	public String typ = "INotifyMessage";
+	public String typ = IMessage.typ+"."+c.getSimpleName();
 
-	@Override
-	public default String getEnumValue() {
-
-		//return  getName();
-		return IMessage.typ + getType() + "." + getName();
-	}
 }

@@ -1,13 +1,20 @@
 package cn.zzdz.interfaces.enummessage;
 
+
+import sun.tracing.dtrace.DTraceProviderFactory;
+
 public interface IMessage {
-	public String typ = "IMessage";
+    Class<?> c = IMessage.class;
+    public String typ = c.getSimpleName();
 
-	default String getEnumValue() {
-		return "IMessage" + "." + getType() + "." + getName();
-	}
+    default String getEnumValue() {
+       return  typ;
+    }
 
-	public String getType();
+    default String getType() {
+        Class<?> c2 = this.getClass();
+        return c2.getSimpleName();
+    }
 
-	public String getName();
+    public String getName();
 }
