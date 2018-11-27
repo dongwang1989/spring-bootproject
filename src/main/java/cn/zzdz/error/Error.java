@@ -9,7 +9,6 @@ public class Error extends RuntimeException {
 	private final String values;
 
 	public Error(final IMessage message, final String... params) {
-		System.out.println(message.getName());
 		String val=message.getEnumValue();
 		values = MessageSourceHolder.getMessageSource().getMessage(val, null, null);
 		//values = MessageSourceHolder.getMessageSource().getMessage(message.getEnumValue(), params, null);

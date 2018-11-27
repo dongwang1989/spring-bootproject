@@ -22,7 +22,7 @@ public class EnumError extends RuntimeException {
         MyLocaleResolver ft = new MyLocaleResolver();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         Locale locale = ft.resolveLocale(request);
-        String mg = notifyMessage.getName();
+        String mg = notifyMessage.getName((Enum<?>)notifyMessage);
         values = MessageSourceHolder.getMessageSource().getMessage(mg, null, locale);
         values = MessageFormat.format(values, param);
     }

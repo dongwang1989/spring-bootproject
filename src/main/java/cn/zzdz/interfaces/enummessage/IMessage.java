@@ -5,14 +5,19 @@ public interface IMessage {
     Class<?> c = IMessage.class;
     public String typ = c.getSimpleName();
 
-    default String getEnumValue() {
-       return  typ;
-    }
+
 
     default String getType() {
         Class<?> c2 = this.getClass();
         return c2.getSimpleName();
     }
 
-    public String getName();
+    default String getName(Enum<?> d) {
+
+        return getType() + "." + d.name();
+    }
+
+    default String getEnumValue() {
+        return typ + "." + getType();
+    }
 }

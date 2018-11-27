@@ -7,7 +7,6 @@ spring:
       username: root
       password: 123456
 
-
    jpa:
      database: MYSQL
      hibernate.ddl-auto: none 
@@ -25,7 +24,7 @@ spring:
 server:
    error:
      path: /error 
-   port: 8080
+   port: 8888
 logging.file: D:/data/mylog
 logging.path: myLog.log
 
