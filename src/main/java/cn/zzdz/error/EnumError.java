@@ -1,7 +1,6 @@
 package cn.zzdz.error;
 
 
-import cn.zzdz.component.CommonEnumTran;
 import cn.zzdz.interfaces.enummessage.IMessage;
 
 public class EnumError extends RuntimeException {
@@ -11,7 +10,8 @@ public class EnumError extends RuntimeException {
     private String values;
 
     public EnumError(IMessage iMessage, final String... param) {
-          values = CommonEnumTran.getMessage(iMessage,param);
+        values = iMessage.getMessage(iMessage,param);
+          //values = CommonEnumTran.getMessage(iMessage,param);
     }
 
     @Override
