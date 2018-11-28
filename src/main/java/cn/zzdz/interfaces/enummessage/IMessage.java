@@ -1,6 +1,5 @@
 package cn.zzdz.interfaces.enummessage;
 
-
 public interface IMessage {
     Class<?> c = IMessage.class;
     public String typ = c.getSimpleName();
@@ -14,7 +13,7 @@ public interface IMessage {
 
     default String getName(Enum<?> d) {
 
-        return getType() + "." + d.name();
+        return getType().toUpperCase() + "." + d.name();
     }
 
     default String getEnumValue() {

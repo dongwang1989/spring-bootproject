@@ -9,9 +9,7 @@ public class Error extends RuntimeException {
 	private final String values;
 
 	public Error(final IMessage message, final String... params) {
-		String val=message.getEnumValue();
-		values = MessageSourceHolder.getMessageSource().getMessage(val, null, null);
-		//values = MessageSourceHolder.getMessageSource().getMessage(message.getEnumValue(), params, null);
+		values=CommonEnumTran.getMessage(message,params);
 	}
 
 	@Override

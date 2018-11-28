@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalExceptionHandler{
 	@ExceptionHandler(value = RuntimeException.class)
 	public ExceptionDto runtimeExceptionHandler(HttpServletRequest request, RuntimeException exception) throws RuntimeException {
+		//System.out.println("GlobalExceptionHandler");
 		//exception.printStackTrace();
 		ExceptionDto exceptiondto = new ExceptionDto();
 		exceptiondto.setErrorType("error");
@@ -26,6 +27,7 @@ public class GlobalExceptionHandler{
 	@ExceptionHandler(value = Exception.class)
 	@ResponseBody
 	public ExceptionDto allExceptionHandler(HttpServletRequest request, Exception exception) throws Exception  {
+
 		//exception.printStackTrace();
 		ExceptionDto exceptiondto = new ExceptionDto();
 		exceptiondto.setErrorType("fatal error");
