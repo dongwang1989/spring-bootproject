@@ -4,5 +4,9 @@ import cn.zzdz.interfaces.enummessage.IMessage;
 
 
 public enum ErrorMessage implements IMessage {
-    INCORRECT_PASSWORD, POWER_NOTENOUGH, NOTCONTROLLER_MESSAGEB;
+    INCORRECT_PASSWORD, NOTCONTROLLER_MESSAGEB, POWER_NOTENOUGH;
+    @Override
+    public String getInfo() {
+        return getMessage(this.name());
+    }
 }

@@ -9,30 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.MessageFormat;
 import java.util.Locale;
 
-public interface IMessage {
-    Class<?> c = IMessage.class;
-    public String typ = c.getSimpleName();
+public interface IMessage  {
 
 
-    default String getType() {
-        Class<?> c2 = this.getClass();
-        return c2.getSimpleName();
-    }
-
-    default String getName(Enum<?> d) {
-
-        return getType().toUpperCase() + "." + d.name();
-    }
-    default  String getMessage(IMessage imessage, final String... param) {
-        MyLocaleResolver myLocaleResolver=new MyLocaleResolver();
+    public String getInfo();
+    default String getMessage(String name, final String... param) {
+        String value=this.getClass().getSimpleName().toUpperCase()+"."+name;
+        MyLocaleResolver myLocaleResolver = new MyLocaleResolver();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         Locale locale = myLocaleResolver.resolveLocale(request);
-        String values = imessage.getName((Enum<?>) imessage);
-        values = MessageSourceHolder.getMessageSource().getMessage(values, null, locale);
-        values = MessageFormat.format(values, param);
-        return values;
+        value= MessageSourceHolder.getMessageSource().getMessage(value, null, locale);
+        value= MessageFormat.format(value, param);
+        return value;
     }
-    default String getEnumValue() {
-        return typ + "." + getType();
-    }
+
 }
