@@ -1,6 +1,6 @@
-package cn.zzdz.error;
+package cn.zzdz.component;
 
-import cn.zzdz.component.MyLocaleResolver;
+import cn.zzdz.error.MessageSourceHolder;
 import cn.zzdz.interfaces.enummessage.IMessage;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

@@ -1,5 +1,6 @@
 package cn.zzdz.error;
 
+import cn.zzdz.component.CommonEnumTran;
 import cn.zzdz.dto.ResultDto;
 import cn.zzdz.interfaces.enummessage.IMessage;
 
@@ -9,7 +10,7 @@ public class Error extends RuntimeException {
 	private final String values;
 
 	public Error(final IMessage message, final String... params) {
-		values=CommonEnumTran.getMessage(message,params);
+		values= CommonEnumTran.getMessage(message,params);
 	}
 
 	@Override
