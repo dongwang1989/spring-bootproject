@@ -7,7 +7,7 @@ public enum WarningMessage implements IMessage {
 
 
     @Override
-    public String getInfo(String... param) {
-        return null;
+    public String getInfo(final String... param) {
+        return getMessage(getType() + "." + this.name(), param);
     }
 }

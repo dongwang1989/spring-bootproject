@@ -6,7 +6,7 @@ public enum ButtonMessage implements IMessage {
 	BUTTON_PASSWORD;
 
 	@Override
-	public String getInfo(String... param) {
-		return null;
+	public String getInfo(final String... param) {
+		return getMessage(getType() + "." + this.name(), param);
 	}
 }

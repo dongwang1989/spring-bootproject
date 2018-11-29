@@ -8,6 +8,7 @@ import cn.zzdz.error.EnumError;
 import cn.zzdz.error.Error;
 import cn.zzdz.interfaces.service.IUserService;
 import cn.zzdz.permission.IPermission;
+import cn.zzdz.test.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
@@ -126,9 +127,12 @@ public class UserController {
     }
 
     @GetMapping("/test/throwerror2")
-    public void getaa2() {
-
+    public void getab() {
         System.out.println(ErrorMessage.INCORRECT_PASSWORD.getInfo());
+    }
+    @GetMapping("/test/throwerror3")
+    public void getac() {
+        System.out.println(new Test("ERRORMESSAGE.POWER_NOTENOUGH").getInfo());
     }
 
 
