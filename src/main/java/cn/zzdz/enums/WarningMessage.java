@@ -6,5 +6,8 @@ public enum WarningMessage implements IMessage {
 	CONTROLLER_TESTA;
 
 
-
+    @Override
+    public String getInfo(String... param) {
+        return null;
+    }
 }

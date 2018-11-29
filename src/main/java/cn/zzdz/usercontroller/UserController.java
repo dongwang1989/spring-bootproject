@@ -127,7 +127,8 @@ public class UserController {
 
     @GetMapping("/test/throwerror2")
     public void getaa2() {
-        throw new RuntimeException("yup");
+
+        System.out.println(ErrorMessage.INCORRECT_PASSWORD.getInfo());
     }
 
 
