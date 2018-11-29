@@ -131,8 +131,8 @@ public class UserController {
         System.out.println(ErrorMessage.INCORRECT_PASSWORD.getInfo());
     }
     @GetMapping("/test/throwerror3")
-    public void getac() {
-        System.out.println(new Test("ERRORMESSAGE.POWER_NOTENOUGH").getInfo());
+    public String getac() {
+        return new Test("NAME").getInfo();
     }
 
 
