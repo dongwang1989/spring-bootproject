@@ -10,11 +10,10 @@ import java.util.Locale;
 
 public class I18n {
     public static String getMessage(String name, final String... param) {
-        String value = name;
         MyLocaleResolver myLocaleResolver = new MyLocaleResolver();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         Locale locale = myLocaleResolver.resolveLocale(request);
-        value = MessageSourceHolder.getMessageSource().getMessage(value, null, locale);
+        String value = MessageSourceHolder.getMessageSource().getMessage(name, null, locale);
         value = MessageFormat.format(value, param);
         return value;
     }
