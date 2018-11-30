@@ -18,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.securityContext().securityContextRepository(createsecurity()).and().authorizeRequests()
 				.antMatchers("/", "/whoim2", "/hello/{param}", "/login", "/whoim", "/exception/{param}",
-						"/GET/environment", "/ha", "/a.html", "/new/**", "/cas/**")
+						"/GET/environment", "/ha", "/a.html", "/new/**", "/denglu","/cas/**")
 				.permitAll().anyRequest().authenticated().and().csrf().disable();
 	}
 

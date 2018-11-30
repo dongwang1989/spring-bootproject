@@ -1,41 +1,28 @@
 package cn.zzdz.usercontroller;
 
-import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import java.util.logging.Logger;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import cn.zzdz.component.MyLocaleResolver;
-import cn.zzdz.error.EnumError;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import cn.zzdz.domain.User;
 import cn.zzdz.dto.ResultDto;
 import cn.zzdz.dto.UserDto;
 import cn.zzdz.enums.ErrorMessage;
+import cn.zzdz.error.EnumError;
 import cn.zzdz.error.Error;
 import cn.zzdz.interfaces.service.IUserService;
 import cn.zzdz.permission.IPermission;
+import cn.zzdz.test.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 @RestController
@@ -45,11 +32,13 @@ public class UserController {
 
     @PostMapping("/login") // (value="/login", method = RequestMethod.POST, consumes = "application/json")
     public ResultDto log(@RequestBody UserDto userdtolog, HttpSession session) {
+        System.out.println("12");
         return userService.getUser(userdtolog, session);
     }
 
     @RequestMapping("/denglu")
     public String denglu(@RequestParam String username, @RequestParam String pwd, HttpSession session) {
+        System.out.println(username);
         return userService.denglu(username, pwd, session);
     }
 
@@ -71,7 +60,6 @@ public class UserController {
 
     @RequestMapping("/loginout")
     public ResultDto logout(HttpSession session) {
-        "".equals("");
         return userService.logout(session);
     }
 
@@ -105,11 +93,10 @@ public class UserController {
     public ResultDto getHello(@PathVariable String param) {
         return userService.getHello(param);
     }
+
     @Resource
     private MessageSource messageSource;
 
-//    @Autowired
-//    private MyLocaleResolver localea;
     @RequestMapping("/exception/checked")
     public void checkedException(HttpServletRequest httpServletRequest) throws Exception {
         throw new Error(ErrorMessage.INCORRECT_PASSWORD);
@@ -117,7 +104,6 @@ public class UserController {
 
     @RequestMapping("/ha")
     public List<User> ha(@RequestParam String username) {
-        System.out.println(username);
         return userService.Likenames(username);
     }
 
@@ -135,19 +121,19 @@ public class UserController {
     }
 
 
-
-
-
-
     @GetMapping("/test/throwerror")
-    public void getaa()  throws Exception{
-        throw  new EnumError(ErrorMessage.INCORRECT_PASSWORD,"ad");
-        //new EnumError("ErrorMessage.INCORRECT_PASSWORD","ad");
+    public void getaa() throws Exception {
+        throw new EnumError(ErrorMessage.INCORRECT_PASSWORD, "ad");
     }
+
     @GetMapping("/test/throwerror2")
-    public void getaa2()  {
-        throw  new RuntimeException("yup");
-        //wde
+    public void getab() {
+        System.out.println(ErrorMessage.INCORRECT_PASSWORD.getInfo());
     }
+    @GetMapping("/test/throwerror3")
+    public String getac() {
+        return new Test("NAME").getInfo();
+    }
+
 
 }

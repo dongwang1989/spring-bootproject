@@ -1,19 +1,18 @@
 package cn.zzdz.error;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.boot.web.servlet.error.ErrorController;
+import cn.zzdz.dto.ExceptionDto;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.zzdz.dto.ExceptionDto;
+import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice // 给controller用的aop 所有controller
 @ResponseBody
 public class GlobalExceptionHandler{
 	@ExceptionHandler(value = RuntimeException.class)
 	public ExceptionDto runtimeExceptionHandler(HttpServletRequest request, RuntimeException exception) throws RuntimeException {
+		//System.out.println("GlobalExceptionHandler");
 		//exception.printStackTrace();
 		ExceptionDto exceptiondto = new ExceptionDto();
 		exceptiondto.setErrorType("error");
@@ -28,6 +27,7 @@ public class GlobalExceptionHandler{
 	@ExceptionHandler(value = Exception.class)
 	@ResponseBody
 	public ExceptionDto allExceptionHandler(HttpServletRequest request, Exception exception) throws Exception  {
+
 		//exception.printStackTrace();
 		ExceptionDto exceptiondto = new ExceptionDto();
 		exceptiondto.setErrorType("fatal error");
@@ -38,6 +38,4 @@ public class GlobalExceptionHandler{
 		exceptiondto.setErrorclass(exception.getClass());
 		return exceptiondto;
 	}
-	//EnumError
-
 }

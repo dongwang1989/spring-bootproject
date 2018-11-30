@@ -13,7 +13,7 @@ spring:
      hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
      show-sql: true 
    profiles:
-     active: dev
+     active: @profileActive@
    messages:
      basename: i18n.messages
      cache-second: 3600
@@ -24,7 +24,7 @@ spring:
 server:
    error:
      path: /error 
-   
+   port: 8080
 logging.file: D:/data/mylog
 logging.path: myLog.log
 
