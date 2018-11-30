@@ -5,5 +5,5 @@ target
 .apt_generated
 .settings
 /mm.txt
-.idea/
+/.idea
 static/
