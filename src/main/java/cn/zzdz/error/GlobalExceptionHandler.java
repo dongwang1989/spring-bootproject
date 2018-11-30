@@ -13,9 +13,8 @@ import cn.zzdz.dto.ExceptionDto;
 @ResponseBody
 public class GlobalExceptionHandler{
 	@ExceptionHandler(value = RuntimeException.class)
-	public ExceptionDto runtimeExceptionHandler(HttpServletRequest request, RuntimeException exception) throws Exception {
-		System.out.println("RuntimeException");
-		exception.printStackTrace();
+	public ExceptionDto runtimeExceptionHandler(HttpServletRequest request, RuntimeException exception) throws RuntimeException {
+		//exception.printStackTrace();
 		ExceptionDto exceptiondto = new ExceptionDto();
 		exceptiondto.setErrorType("error");
 		exceptiondto.setCause(exception.getCause());
@@ -27,8 +26,9 @@ public class GlobalExceptionHandler{
 	}
 
 	@ExceptionHandler(value = Exception.class)
-	public ExceptionDto allExceptionHandler(HttpServletRequest request, Exception exception) throws Exception {
-		exception.printStackTrace();
+	@ResponseBody
+	public ExceptionDto allExceptionHandler(HttpServletRequest request, Exception exception) throws Exception  {
+		//exception.printStackTrace();
 		ExceptionDto exceptiondto = new ExceptionDto();
 		exceptiondto.setErrorType("fatal error");
 		exceptiondto.setCause(exception.getCause());
@@ -38,5 +38,6 @@ public class GlobalExceptionHandler{
 		exceptiondto.setErrorclass(exception.getClass());
 		return exceptiondto;
 	}
+	//EnumError
 
 }

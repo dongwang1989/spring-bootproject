@@ -4,5 +4,6 @@ target
 .springBeans
 .apt_generated
 .settings
+/mm.txt
 .idea
 static/
