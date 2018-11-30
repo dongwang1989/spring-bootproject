@@ -9,7 +9,7 @@ public class Error extends RuntimeException {
 	private final String values;
 
 	public Error(IMessage iMessage, final String... param) {
-		values = iMessage.getInfo(param);
+		values = iMessage.getMessage(param);
 	}
 
 	@Override

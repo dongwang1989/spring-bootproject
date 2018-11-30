@@ -128,11 +128,11 @@ public class UserController {
 
     @GetMapping("/test/throwerror2")
     public void getab() {
-        System.out.println(ErrorMessage.INCORRECT_PASSWORD.getInfo());
+        System.out.println(ErrorMessage.INCORRECT_PASSWORD.getMessage());
     }
     @GetMapping("/test/throwerror3")
     public String getac() {
-        return new Test("NAME").getInfo();
+        return new Test("NAME").getMessage();
     }
 
 
