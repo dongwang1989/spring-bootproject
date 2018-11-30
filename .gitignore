@@ -6,5 +6,5 @@ target
 .settings
 /mm.txt
 static/
-.idea/**
+*.idea
 
