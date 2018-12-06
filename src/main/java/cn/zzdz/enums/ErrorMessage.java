@@ -7,6 +7,8 @@ public enum ErrorMessage implements IMessage {
     NOTCONTROLLER_MESSAGEB,
     POWER_NOTENOUGH;
 
+
+
     @Override
     public String getName() {
         return name();

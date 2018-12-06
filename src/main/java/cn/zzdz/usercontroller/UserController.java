@@ -4,6 +4,7 @@ import cn.zzdz.domain.User;
 import cn.zzdz.dto.ResultDto;
 import cn.zzdz.dto.UserDto;
 import cn.zzdz.enums.ErrorMessage;
+import cn.zzdz.enums.UserType;
 import cn.zzdz.error.EnumError;
 import cn.zzdz.error.Error;
 import cn.zzdz.interfaces.service.IUserService;
@@ -130,9 +131,15 @@ public class UserController {
     public void getab() {
         System.out.println(ErrorMessage.INCORRECT_PASSWORD.getMessage());
     }
+
     @GetMapping("/test/throwerror3")
     public String getac() {
         return new Test("NAME").getMessage();
+    }
+
+    @GetMapping("/test/throwerror5")
+    public void getae() {
+        System.out.println(UserType.ADMIN.getMessage());
     }
 
 

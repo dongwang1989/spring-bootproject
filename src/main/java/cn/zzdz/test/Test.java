@@ -9,6 +9,8 @@ public class Test implements IMessage {
         this.name = getType() + "." + name;
     }
 
+
+
     @Override
     public String getName() {
         return name;

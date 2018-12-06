@@ -14,12 +14,13 @@ public interface IMessage {
         final HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         final Locale locale = myLocaleResolver.resolveLocale(request);
         return MessageSourceHolder.getMessageSource().getMessage(getType() + "." + getName(), param, locale);
-    }
 
+    }
     String getName();
 
     default String getType() {
         return getClass().getSimpleName().toUpperCase();
     }
+
 
 }
