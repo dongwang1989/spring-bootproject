@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableScheduling
 public class BatchController {
 //    //每2秒钟执行一次
-    //@Scheduled(cron = "*/2 * * * * ?")n
+    //@Scheduled(cron = "*/2 * * * * ?")
     public void test(){
         System.out.println ("Time: ");
     }
