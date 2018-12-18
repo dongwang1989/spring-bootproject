@@ -10,7 +10,8 @@ public class EnumError extends RuntimeException {
     private String values;
 
     public EnumError(IMessage iMessage, final String... param) {
-        values = iMessage.getName();
+        //values = iMessage.getName();
+        values = iMessage.getMessage(param);
     }
 
     @Override

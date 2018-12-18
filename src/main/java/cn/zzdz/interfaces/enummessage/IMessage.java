@@ -13,6 +13,7 @@ public interface IMessage {
         final MyLocaleResolver myLocaleResolver = new MyLocaleResolver();
         final HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         final Locale locale = myLocaleResolver.resolveLocale(request);
+        System.out.println(getType() + "." + getName());
         return MessageSourceHolder.getMessageSource().getMessage(getType() + "." + getName(), param, locale);
 
     }
