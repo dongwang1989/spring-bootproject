@@ -1,13 +1,7 @@
 package cn.zzdz.repository;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
-
+import cn.zzdz.interfaces.service.IUserService;
+import cn.zzdz.service.impl.AuthorityImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
@@ -15,8 +9,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpRequestResponseHolder;
 import org.springframework.security.web.context.SecurityContextRepository;
 
-import cn.zzdz.interfaces.service.IUserService;
-import cn.zzdz.service.impl.AuthorityImpl;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ContentRepository implements SecurityContextRepository {
 
@@ -26,6 +24,7 @@ public class ContentRepository implements SecurityContextRepository {
 	@Override
 	@Transactional
 	public SecurityContext loadContext(HttpRequestResponseHolder requestResponseHolder) {
+		System.out.println("ContentRepository");
 		HttpSession session = requestResponseHolder.getRequest().getSession();
 		SecurityContext getcontext;
 		if (session == null || session.getAttribute("username") == null) {
