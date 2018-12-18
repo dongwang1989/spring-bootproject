@@ -8,7 +8,6 @@ public enum ErrorMessage implements IMessage {
     POWER_NOTENOUGH;
 
 
-
     @Override
     public String getName() {
         return name();
