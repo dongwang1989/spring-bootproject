@@ -141,6 +141,10 @@ public class UserController {
     public void getae() {
         System.out.println(UserType.ADMIN.getMessage());
     }
+    @RequestMapping("/test/hib")
+    public void hib() {
 
+         userService.ddd();
+    }
 
 }

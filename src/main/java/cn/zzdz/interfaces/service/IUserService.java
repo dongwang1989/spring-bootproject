@@ -1,13 +1,12 @@
 package cn.zzdz.interfaces.service;
 
-import java.util.List;
-import java.util.Set;
-
-import javax.servlet.http.HttpSession;
-
 import cn.zzdz.domain.User;
 import cn.zzdz.dto.ResultDto;
 import cn.zzdz.dto.UserDto;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Set;
 
 public interface IUserService {
 
@@ -33,4 +32,6 @@ public interface IUserService {
 	public List<User> Likenames(String username);
 
 	public String denglu(String username, String pwd, HttpSession session);
+
+	public void ddd();
 }
