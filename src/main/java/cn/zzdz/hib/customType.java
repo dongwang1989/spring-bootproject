@@ -41,9 +41,7 @@ public class customType implements UserType {
         UserStatus h=null;
         if (resultSet.wasNull()) return null;
         if (null != s) {
-
             if (s.equals("A")) {
-                System.out.println(s);
                 h= UserStatus.ACTIVE;
             } else if (s.equals("D")) {
                 h= UserStatus.DISABLED;

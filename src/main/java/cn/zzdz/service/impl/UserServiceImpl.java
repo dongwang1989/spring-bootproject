@@ -91,7 +91,7 @@ public class UserServiceImpl implements IUserService {
     public void ddd() {
         UserDto userDto = new UserDto();
         User user = userJpaRepository.findUserInfoByuser("zhangsan");
-        System.out.println(user.getUserstatus().getType());
+        System.out.println(user.getUserstatus().getMessage());
     }
 
     @Override
