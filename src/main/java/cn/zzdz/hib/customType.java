@@ -41,15 +41,20 @@ public class customType implements UserType {
         UserStatus h=null;
         if (resultSet.wasNull()) return null;
         if (null != s) {
-            if (s.equals("A")) {
-                h= UserStatus.ACTIVE;
-            } else if (s.equals("D")) {
-                h= UserStatus.DISABLED;
-            }
+            h=getEnum(s);
         }
+        System.out.println(h.getMessage());
         return h;
     }
-
+    public UserStatus getEnum(String name){
+        UserStatus c=null;
+        for (int i = 0; i < UserStatus.values().length; i++) {
+            if(UserStatus.values()[i].getName().equals(name)){
+                c=UserStatus.values()[i];
+            }
+        }
+        return c;
+    }
     @Override
     public void nullSafeSet(PreparedStatement preparedStatement, Object o, int i, SharedSessionContractImplementor sharedSessionContractImplementor) throws HibernateException, SQLException {
         if (null == o) {
