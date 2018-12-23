@@ -23,7 +23,7 @@ public class MyLocaleResolver implements LocaleResolver {
     }
     @Override
     public void setLocale(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Locale locale) {
-
+        String d="";
     }
 }
 

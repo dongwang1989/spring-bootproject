@@ -21,5 +21,8 @@ public interface LookUp extends IMessage {
         final Locale locale = myLocaleResolver.resolveLocale(request);
         return MessageSourceHolder.getMessageSource().getMessage(lookup + "." + getLookupType().getName() + "." + getName(), param, locale);
     }
+    default void ml(){
+
+    }
 
 }

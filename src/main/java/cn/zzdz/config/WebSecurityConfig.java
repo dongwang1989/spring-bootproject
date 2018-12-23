@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public SecurityContextRepository createsecurity() {
 		return new ContentRepository();
 	}
-
+		String ng="";
 	// @Autowired
 	// public void configureGlobal(AuthenticationManagerBuilder auth) throws
 	// Exception {
