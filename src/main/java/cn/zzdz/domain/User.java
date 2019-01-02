@@ -1,15 +1,20 @@
 package cn.zzdz.domain;
 
 import cn.zzdz.enums.UserStatus;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Entity
-@TypeDef(name = "ac", typeClass = cn.zzdz.hib.customType.class)
+//@TypeDef(typeClass = cn.zzdz.hib.customType.class,defaultForType = UserStatus.class,parameters = @org.hibernate.annotations.Parameter(name="class",value="com.zzz.userstatus"))
+//@TypeDef(typeClass = cn.zzdz.hib.customType.class,defaultForType = Usertype.class,parameters = @org.hibernate.annotations.Parameter(name="class",value="com.zzz.usertype"))
+@TypeDefs(@TypeDef(typeClass = cn.zzdz.hib.customType.class,defaultForType = UserStatus.class,parameters = @org.hibernate.annotations.Parameter(name="class",value="cn.zzdz.enums.UserStatus")))
+
 public class User implements Serializable {
     /**
      * EntityManager em = emf.createEntityManager(); Query query =
@@ -36,7 +41,6 @@ public class User implements Serializable {
     private Set<String> permission;
 
     @Column(name="userstatus")
-    @Type(type = "ac")
     private UserStatus userstatus;
 
     public UserStatus getUserstatus() {
@@ -47,7 +51,16 @@ public class User implements Serializable {
         this.userstatus = userstatus;
     }
 
-    public Set<String> getPermission() {
+    public Set<String> getPermission()
+
+
+    {
+     Map<String, Map<String, List<String>>> map=null;
+     map.get("");
+
+
+
+
         return permission;
     }
 
