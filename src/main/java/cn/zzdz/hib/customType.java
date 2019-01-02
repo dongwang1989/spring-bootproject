@@ -8,6 +8,8 @@ import org.hibernate.usertype.ParameterizedType;
 import org.hibernate.usertype.UserType;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,19 +42,27 @@ public class customType implements UserType, ParameterizedType {
 
     @Override
     public Object nullSafeGet(ResultSet resultSet, String[] strings, SharedSessionContractImplementor sharedSessionContractImplementor, Object o) throws HibernateException, SQLException {
-
+        Object obj=null;
         String s = (String) resultSet.getObject(strings[0]);
-
-        for (int i = 0; i < this.clazz.getEnumConstants().length; i++) {
-
-            System.out.println(this.clazz.getEnumConstants()[i].getClass());
+        Method m;
+        try {
+            m = clazz.getMethod("getName");
+            for (int i = 0; i < this.clazz.getEnumConstants().length; i++) {
+                String invoke22 = (String) m.invoke(this.clazz.getEnumConstants()[i]);
+                if ((invoke22.equals(s))) {
+                    obj=this.clazz.getEnumConstants()[i];
+                }
+            }
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         }
-        UserStatus h = null;
-        if (resultSet.wasNull()) return null;
-        if (null != s) {
-            h = getEnum(s);
-        }
-        return h;
+
+
+        return obj;
     }
 
     public UserStatus getEnum(String name) {
@@ -111,7 +121,5 @@ public class customType implements UserType, ParameterizedType {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        //Class.forName("");
-        // Class.forName()
     }
 }

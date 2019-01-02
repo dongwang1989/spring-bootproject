@@ -26,18 +26,7 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserJpaRepository userJpaRepository;
 
-    public void dds() {
-        // for (int i = 0; i < 1000000000; i++) {
-        // Random rand = new Random();
-        // int x;
-        // x = rand.nextInt(100);
-        // int id = i + 1;
-        // String content = "content" + String.valueOf(id) + String.valueOf(x);
-        // String title = "title" + String.valueOf(id);
-        // String types = "";
-        // String dates = "";
-        // }
-    }
+
 
     @Override
     public ResultDto saveUser(UserDto userDto) {
@@ -91,6 +80,7 @@ public class UserServiceImpl implements IUserService {
     public void ddd() {
         UserDto userDto = new UserDto();
         User user = userJpaRepository.findUserInfoByuser("zhangsan");
+        System.out.println(user.getUserstatus().toString());
         //System.out.println(user.getUserstatus().getMessage());
     }
 
