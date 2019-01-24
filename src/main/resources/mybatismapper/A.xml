@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zzdz.mapper.IUserMapper">
+    <select id="finduserbypage" parameterType="cn.zzdz.domain.User" resultType="cn.zzdz.domain.User">
+    select  * from user
+    </select>
+
+    <select id="finduserbyid" parameterType="cn.zzdz.dto.UserDto" resultType="cn.zzdz.domain.User">
+    select * from user where <if test="id!=null">id=#{id}</if>
+    </select>
+    <insert id="adduser" parameterType="cn.zzdz.dto.UserDto">
+        insert into user (age,name,pwd,sex,username,userstatus)values
+        (#{age},#{name},#{pwd},#{sex},#{username},#{userstatus})
+    </insert>
+    <update id="edituser" parameterType="cn.zzdz.dto.UserDto">
+        update user set
+        <if test="age!=null">age=#{age}</if>
+        <if test="name!=null">name=#{name}</if>
+        <if test="pwd!=null">pwd=#{pwd}</if>
+        <if test="sex!=null">sex=#{sex}</if>
+        <if test="username!=null">username=#{username}</if>
+        <if test="userstatus!=null">userstatus=#{userstatus}</if>
+        where id=#{id}
+    </update>
+
+</mapper>

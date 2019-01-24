@@ -1,5 +1,6 @@
 package cn.zzdz.usercontroller;
 
+import cn.zzdz.annotation.IReturnEntityColum;
 import cn.zzdz.domain.User;
 import cn.zzdz.dto.ResultDto;
 import cn.zzdz.dto.UserDto;
@@ -9,18 +10,29 @@ import cn.zzdz.error.EnumError;
 import cn.zzdz.error.Error;
 import cn.zzdz.interfaces.service.IUserService;
 import cn.zzdz.permission.IPermission;
+import cn.zzdz.service.impl.UserServiceImpl;
+import cn.zzdz.service.impl.mapppertest;
 import cn.zzdz.test.Test;
+import cn.zzdz.valid.interfaces.Add;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +43,9 @@ public class UserController {
     @Autowired // 如果用set方法加AutoWired那么他会自动给你把这个对象调用的地方都改过来。
     private IUserService userService;
 
+     @Autowired
+     private mapppertest hhh;
+
     @PostMapping("/login") // (value="/login", method = RequestMethod.POST, consumes = "application/json")
     public ResultDto log(@RequestBody UserDto userdtolog, HttpSession session) {
         System.out.println("12");
@@ -38,7 +53,7 @@ public class UserController {
     }
 
     @RequestMapping("/denglu")
-    public String denglu(@RequestParam String username, @RequestParam String pwd, HttpSession session) {
+    public String denglu( @RequestParam String username, @RequestParam String pwd, HttpSession session) {
         System.out.println(username);
         return userService.denglu(username, pwd, session);
     }
@@ -143,8 +158,43 @@ public class UserController {
     }
     @RequestMapping("/test/hib")
     public void hib() {
-
          userService.ddd();
     }
+    @GetMapping("test/validate1")
+    @ResponseBody
+    public String validate1(
+
+            @Size(min = 1,max = 10,message = "姓名长度必须为1到10")@RequestParam("name") String name,
+            @Min(value = 10,message = "年龄最小为10")@Max(value = 100,message = "年龄最大为100") @RequestParam("age") Integer age//,
+            //@Future @RequestParam("birth")@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss") Date birth
+            ){
+        return "validate1";
+    }
+    @RequestMapping("test/finduserbypage")
+    public void   finduserbypage(){
+        UserDto userdto = new UserDto();
+        userdto.setSex("1");
+        //UserServiceImpl h = new UserServiceImpl();
+        //User user=new User();
+//        user.setPageIndex(1);
+//        user.setPageSize(10);
+        userService.finduserbypage(userdto);
+    }
+    @RequestMapping("test/22")
+    public @Validated(value={Add.class})User   test22(){
+        User user = userService.test();
+        return user;
+    }
+
+    @RequestMapping("/test/33")
+    @IReturnEntityColum(clazz = User.class,value = {"id","name"})
+    public   User test33(){
+        User user=new User();
+        user.setId(1);
+        user.setName("张三");
+        user.setSex("难");
+        return user;
+    }
+
 
 }

@@ -1,20 +1,24 @@
 package cn.zzdz.domain;
 
+
+import cn.zzdz.annotation.Ipassword;
 import cn.zzdz.enums.UserStatus;
+import cn.zzdz.hib.CustomType;
+import cn.zzdz.valid.interfaces.Add;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @Entity
-//@TypeDef(typeClass = cn.zzdz.hib.customType.class,defaultForType = UserStatus.class,parameters = @org.hibernate.annotations.Parameter(name="class",value="com.zzz.userstatus"))
-//@TypeDef(typeClass = cn.zzdz.hib.customType.class,defaultForType = Usertype.class,parameters = @org.hibernate.annotations.Parameter(name="class",value="com.zzz.usertype"))
-@TypeDefs(@TypeDef(typeClass = cn.zzdz.hib.customType.class,defaultForType = UserStatus.class,parameters = @org.hibernate.annotations.Parameter(name="class",value="cn.zzdz.enums.UserStatus")))
-
+@TypeDefs(@TypeDef(typeClass = CustomType.class, defaultForType = UserStatus.class, parameters = @org.hibernate.annotations.Parameter(name = "class", value = "cn.zzdz.enums.UserStatus")))
+//@JsonIgnoreProperties(value = )
+ //@JsonIgnoreProperties(value = {"name"})
 public class User implements Serializable {
     /**
      * EntityManager em = emf.createEntityManager(); Query query =
@@ -27,12 +31,26 @@ public class User implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotEmpty(groups = {Add.class})
     public int id;
+    @Column(name = "name")
+    @NotEmpty
     private String name;
+    @Min(value = 18, message = "年龄最小为18")
+    @Column(name = "age")
     private int age;
+    @NotEmpty
     private String sex;
+
+    @NotEmpty
+    @Column(name = "username")
     private String username;
-    private String pwd;
+
+    @JsonIgnore
+    //@JsonInclude(value = JsonInclude.Include.NON_NULL)
+    @Ipassword(groups = {Add.class})
+    @Column(name = "pwd")
+    public String pwd;
 
 
     @ElementCollection
@@ -40,7 +58,7 @@ public class User implements Serializable {
     @Column(name = "permission")
     private Set<String> permission;
 
-    @Column(name="userstatus")
+    @Column(name = "userstatus")
     private UserStatus userstatus;
 
     public UserStatus getUserstatus() {
@@ -51,16 +69,9 @@ public class User implements Serializable {
         this.userstatus = userstatus;
     }
 
-    public Set<String> getPermission()
-
-
-    {
-     Map<String, Map<String, List<String>>> map=null;
-     map.get("");
-
-
-
-
+    public Set<String> getPermission() {
+        //Map<String, Map<String, List<String>>> map = null;
+        //map.get("");
         return permission;
     }
 

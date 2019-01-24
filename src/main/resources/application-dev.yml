@@ -1,11 +1,11 @@
-args: 
+args:
  environment: dev
  spring:
    datasource:
      driver-class-name: com.mysql.jdbc.Driver
-     url: jdbc:mysql://172.17.1.56:3306/newwd?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=PRC&useSSL=false
+     url: jdbc:mysql://localhost:3306/newwd?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=PRC&useSSL=false
      username: root
-     password: 123456
+     password: wd123.com
 
    jpa:
      database: MYSQL

@@ -1,5 +1,6 @@
 package cn.zzdz.service.impl;
 
+import cn.zzdz.Convert.ConverterUtil;
 import cn.zzdz.dao.UserJpaRepository;
 import cn.zzdz.domain.User;
 import cn.zzdz.dto.ResultDto;
@@ -8,6 +9,8 @@ import cn.zzdz.enums.ErrorMessage;
 import cn.zzdz.error.EnumError;
 import cn.zzdz.error.Error;
 import cn.zzdz.interfaces.service.IUserService;
+import cn.zzdz.mapper.IUserMapper;
+import cn.zzdz.valid.interfaces.Add;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,7 +18,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +30,8 @@ import java.util.Set;
 public class UserServiceImpl implements IUserService {
     @Autowired
     private UserJpaRepository userJpaRepository;
-
+    @Resource
+    private IUserMapper mapper;
 
 
     @Override
@@ -82,6 +88,16 @@ public class UserServiceImpl implements IUserService {
         User user = userJpaRepository.findUserInfoByuser("zhangsan");
         System.out.println(user.getUserstatus().toString());
         //System.out.println(user.getUserstatus().getMessage());
+    }
+
+    @Override
+    public User test() {
+        User user = new User();
+        user.setName("zhangsan");
+        user.setUsername("努力");
+        return user;
+        //userService.test(user);
+
     }
 
     @Override
@@ -167,6 +183,18 @@ public class UserServiceImpl implements IUserService {
             throw new EnumError(ErrorMessage.INCORRECT_PASSWORD, username);
         }
         return val;
+    }
+    @Override
+    public void finduserbypage(UserDto userDto){
+        List<User> list= userJpaRepository.findAll();
+        for (User u:list){
+            Set<String> set = new HashSet<>();
+            System.out.println(u.getName());
+            set = u.getPermission();
+            for (String h:set) {
+                System.out.println("chang"+h);
+            }
+        }
     }
 
 }

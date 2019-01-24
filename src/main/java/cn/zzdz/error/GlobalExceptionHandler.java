@@ -1,6 +1,7 @@
 package cn.zzdz.error;
 
 import cn.zzdz.dto.ExceptionDto;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice // 给controller用的aop 所有controller
 @ResponseBody
 public class GlobalExceptionHandler{
+	static Logger logger = Logger.getLogger(ExceptionController.class);
 	@ExceptionHandler(value = RuntimeException.class)
 	public ExceptionDto runtimeExceptionHandler(HttpServletRequest request, RuntimeException exception) throws RuntimeException {
 		//System.out.println("GlobalExceptionHandler");
 		//exception.printStackTrace();
+		logger.error(exception.getLocalizedMessage());
 		ExceptionDto exceptiondto = new ExceptionDto();
 		exceptiondto.setErrorType("error");
 		exceptiondto.setCause(exception.getCause());

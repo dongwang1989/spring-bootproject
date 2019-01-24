@@ -10,6 +10,7 @@ import java.util.Set;
 
 public interface IUserService {
 
+	public void finduserbypage(UserDto userdto);
 	public ResultDto getUser(UserDto userdto, HttpSession session);
 
 	public ResultDto saveUser(UserDto userdto);
@@ -34,4 +35,6 @@ public interface IUserService {
 	public String denglu(String username, String pwd, HttpSession session);
 
 	public void ddd();
+
+	public User test();
 }

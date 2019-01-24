@@ -3,7 +3,8 @@ package cn.zzdz.enums;
 import cn.zzdz.interfaces.enummessage.IMessage;
 
 public enum LookupType implements IMessage {
-    USER_STATUS("STAT"), LOOKUP("LU"), USER_TYPE("TYPE");
+    USER_STATUS("STAT"), LOOKUP("LU"), Entity_CheckMessage("CheckMessage"),
+    USER_TYPE("TYPE"),Regular_Type("REGULAR");
     private String name;
 
     private LookupType(String name) {

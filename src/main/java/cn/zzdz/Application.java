@@ -1,5 +1,6 @@
 package cn.zzdz;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -9,6 +10,7 @@ import cn.zzdz.config.WebMvcConfiguration;
 
 @SpringBootApplication
 @EnableCaching
+@MapperScan(value="cn.zzdz.mapper")
 public class Application extends WebMvcConfiguration {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -17,6 +19,5 @@ public class Application extends WebMvcConfiguration {
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
 		configurer.favorPathExtension(false);
-
 	}
 }

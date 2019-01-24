@@ -16,7 +16,7 @@ public class Error extends RuntimeException {
 	public String getMessage() {
 		final ResultDto resultdto = new ResultDto();
 		resultdto.setResult(values);
-		return resultdto.toString();
+		return resultdto.getResult().toString();
 	}
 
 }

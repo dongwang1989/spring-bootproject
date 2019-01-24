@@ -17,7 +17,7 @@ import java.sql.Types;
 import java.util.Objects;
 import java.util.Properties;
 
-public class customType implements UserType, ParameterizedType {
+public class CustomType implements UserType, ParameterizedType {
     @Override
     public int[] sqlTypes() {
         return new int[]{Types.VARCHAR};
