@@ -1,8 +1,6 @@
 package cn.zzdz.annotation;
 
-import cn.zzdz.domain.User;
 
-import javax.validation.Constraint;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

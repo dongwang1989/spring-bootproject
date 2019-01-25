@@ -1,6 +1,7 @@
 package cn.zzdz.usercontroller;
 
 import cn.zzdz.annotation.IReturnEntityColum;
+import cn.zzdz.annotation.Ipassword;
 import cn.zzdz.domain.User;
 import cn.zzdz.dto.ResultDto;
 import cn.zzdz.dto.UserDto;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -194,6 +196,14 @@ public class UserController {
         user.setName("张三");
         user.setSex("难");
         return user;
+    }
+    @RequestMapping("/test/55")
+    public  void test55(@Validated({Add.class}) User user){
+
+    }
+    @RequestMapping("/test/66")
+    public  void test66(String pwd){
+            System.out.println("pwd:"+pwd);
     }
 
 

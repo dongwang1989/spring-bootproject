@@ -31,18 +31,18 @@ public class User implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotEmpty(groups = {Add.class})
+    //@NotEmpty(groups = {Add.class})
     public int id;
     @Column(name = "name")
-    @NotEmpty
+    //@NotEmpty
     private String name;
-    @Min(value = 18, message = "年龄最小为18")
+    //@Min(value = 18, message = "年龄最小为18")
     @Column(name = "age")
     private int age;
-    @NotEmpty
+    //@NotEmpty
     private String sex;
 
-    @NotEmpty
+    //@NotEmpty
     @Column(name = "username")
     private String username;
 

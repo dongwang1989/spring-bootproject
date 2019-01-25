@@ -10,14 +10,16 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Target({ElementType.METHOD, ElementType.TYPE, ElementType.FIELD})
+@Target({ElementType.METHOD, ElementType.TYPE, ElementType.FIELD,ElementType.PARAMETER})
 //METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = {Ipassword.StringChecker.class})
+@Constraint(validatedBy = Ipassword.StringChecker.class)
 public @interface Ipassword {
     String message() default "用户不存在或者不属于当前组织";
 
@@ -25,19 +27,20 @@ public @interface Ipassword {
 
     Class<? extends Payload>[] payload() default {};
 
-    class StringChecker implements ConstraintValidator<Ipassword, String> {
+   public class StringChecker implements ConstraintValidator<Ipassword, Object> {
 
         @Override
         public void initialize(Ipassword arg0) {
+
         }
 
         @Override
-        public boolean isValid(String password, ConstraintValidatorContext context) {
+        public boolean isValid(Object password, ConstraintValidatorContext context) {
             String pwdregular = RegularType.A.getMessage();
-            if (pwdregular.matches(password)) {
-                return true;
-            }
-            return false;
+            Pattern p = Pattern.compile(pwdregular);
+            Matcher m = p.matcher(password.toString());
+            boolean isMatch = m.matches();
+            return  isMatch;
         }
     }
 
