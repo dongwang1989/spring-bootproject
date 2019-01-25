@@ -23,30 +23,26 @@ public class ReturnEntityAspect {
     public Object aroundStatus(ProceedingJoinPoint pjp, IReturnEntityColum rec) throws Throwable {
         Object proceed;
         //System.out.println("这是环绕通知之前的部分!!"); // 获取将要执行的方法名称 String
-        String methodName = pjp.getSignature().getName();
+        //String methodName = pjp.getSignature().getName();
         Map<Object, Object> hashMap = new HashMap<Object, Object>();
         proceed = pjp.proceed();//+"dgod";// 调用目标方法
         Class clazz = proceed.getClass();
         Class cla = Class.forName(clazz.getName());
         Constructor con = cla.getConstructor();
         Object obj = cla.newInstance();
-        if (true) {
-
-            List<String> list = new ArrayList<String>();
-            list = Arrays.asList(rec.value());
-            for (int i = 0; i < rec.value().length; i++) {
-                String name = rec.value()[i];
-                name = name.replaceFirst(name.substring(0, 1), name.substring(0, 1).toUpperCase());
-                Method m = clazz.getMethod("get" + name);
-                Field newname = cla.getDeclaredField(rec.value()[i]);
-                newname.setAccessible(true);
-                newname.set(obj,m.invoke(proceed));
-
+        for (Method met : cla.getDeclaredMethods()) {
+            for (String re : rec.value()) {
+                String fieldName = met.getName().substring(3).toUpperCase();
+                if (fieldName == re.toUpperCase()) {
+                    Field newname = cla.getDeclaredField(re);
+                    newname.setAccessible(true);
+                    newname.set(obj, met.invoke(proceed));
+                }
             }
 
-        } else {
-            proceed = "500";
         }
+
+
         //System.out.println("这是环绕通知之后的部分!!");
         return obj;
     }
