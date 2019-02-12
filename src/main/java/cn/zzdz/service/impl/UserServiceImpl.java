@@ -10,11 +10,13 @@ import cn.zzdz.error.EnumError;
 import cn.zzdz.error.Error;
 import cn.zzdz.interfaces.service.IUserService;
 import cn.zzdz.mapper.IUserMapper;
+import cn.zzdz.redismap.RedisUtils;
 import cn.zzdz.valid.interfaces.Add;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +27,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -32,7 +35,11 @@ public class UserServiceImpl implements IUserService {
     private UserJpaRepository userJpaRepository;
     @Resource
     private IUserMapper mapper;
+    @Resource
+    private RedisUtils redisUtils;
 
+    @Autowired
+    private RedisTemplate<Object, Object> redisTemplate;
 
     @Override
     public ResultDto saveUser(UserDto userDto) {
@@ -62,26 +69,29 @@ public class UserServiceImpl implements IUserService {
     @Override
     public ResultDto getUser(UserDto userDtolog, HttpSession session) {
         ResultDto resultDto = new ResultDto();
-        String strses = session.getAttribute("username").toString();
-        if (strses != null && !strses.equals("")) {
-            resultDto.setResult("当前账号" + session.getAttribute("username") + "已经登陆！");
+        Object userid=redisTemplate.opsForValue().get(session.getId());
+        //String sessionIdValue = session.getAttribute(session.getId()).toString();
+        if (userid != null && !userid.equals("")) {
+            resultDto.setResult("当前账号已经登陆！");
         } else {
             User user = userJpaRepository.getUser(userDtolog.getUsername(), userDtolog.getPwd());
             if (user != null) {
                 resultDto.setResult("登陆成功");
-                session.setAttribute("username", user.getUsername());
-                // session.setAttribute("name", user.getName());
-                // HttpServletRequest request = attributes.getRequest();
-                // 记录登录日志
-                // String ip = request.getRemoteAddr();
-
-            } else {
-                throw new Error(ErrorMessage.INCORRECT_PASSWORD, user.getUsername());
-                // resultDto.setResult("登陆error");
+                redisTemplate.opsForValue().set(session.getId(),userid,1, TimeUnit.HOURS);
+                Set<String> setLit = user.getPermission();
+                if (setLit.size() > 0) {
+                    redisTemplate.opsForSet().add(userid,setLit);
+                    redisTemplate.expire(userid,1,TimeUnit.HOURS);
+                }
             }
+            else {
+                throw new Error(ErrorMessage.INCORRECT_PASSWORD, user.getUsername());
+            }
+
         }
         return resultDto;
     }
+
     @Override
     public void ddd() {
         UserDto userDto = new UserDto();
@@ -184,15 +194,16 @@ public class UserServiceImpl implements IUserService {
         }
         return val;
     }
+
     @Override
-    public void finduserbypage(UserDto userDto){
-        List<User> list= userJpaRepository.findAll();
-        for (User u:list){
+    public void finduserbypage(UserDto userDto) {
+        List<User> list = userJpaRepository.findAll();
+        for (User u : list) {
             Set<String> set = new HashSet<>();
             System.out.println(u.getName());
             set = u.getPermission();
-            for (String h:set) {
-                System.out.println("chang"+h);
+            for (String h : set) {
+                System.out.println("chang" + h);
             }
         }
     }

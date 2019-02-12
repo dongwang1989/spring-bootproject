@@ -60,8 +60,6 @@ public class CustomType implements UserType, ParameterizedType {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-
-
         return obj;
     }
 

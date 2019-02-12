@@ -8,10 +8,13 @@ import cn.zzdz.valid.interfaces.Add;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -38,6 +41,7 @@ public class User implements Serializable {
     private String name;
     //@Min(value = 18, message = "年龄最小为18")
     @Column(name = "age")
+       //(groups = {Add.class})
     private int age;
     //@NotEmpty
     private String sex;
@@ -46,7 +50,7 @@ public class User implements Serializable {
     @Column(name = "username")
     private String username;
 
-    @JsonIgnore
+    //@JsonIgnore
     //@JsonInclude(value = JsonInclude.Include.NON_NULL)
     @Ipassword(groups = {Add.class})
     @Column(name = "pwd")

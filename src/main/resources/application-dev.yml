@@ -23,6 +23,9 @@ args:
  server:
    error:
      path: /error
+#   servlet:
+#     session:
+#       timeout: PT5S
 
  logging.file: D:/data/mylog
  logging.path: myLog.log

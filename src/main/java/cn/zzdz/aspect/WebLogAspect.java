@@ -87,21 +87,21 @@ public class WebLogAspect {
 //		return "lll";
 //
 //	}
-//	@Around("webLog()")
-//	 public Object aroundStatus(ProceedingJoinPoint pjp) throws Throwable {
-//		Object proceed;
-//		System.out.println("这是环绕通知之前的部分!!"); // 获取将要执行的方法名称 String
-//	    String methodName = pjp.getSignature().getName();
-//	 	if(true){
-//
-//			proceed = pjp.proceed()+"dgod";// 调用目标方法
-//	 	}
-//	 	else {
-//			proceed="500";
-//		}
-//		System.out.println("这是环绕通知之后的部分!!");
-//	 	return proceed+"";
-//	}
+	@Around("webLog()")
+	 public Object aroundStatus(ProceedingJoinPoint pjp) throws Throwable {
+		Object proceed;
+		System.out.println("这是环绕通知之前的部分!!"); // 获取将要执行的方法名称 String
+	    //String methodName = pjp.getSignature().getName();
+	 	if(true){
+
+			proceed = pjp.proceed();// 调用目标方法
+	 	}
+	 	else {
+			proceed="500";
+		}
+		System.out.println("这是环绕通知之后的部分!!");
+	 	return proceed;
+	}
 
 
 	// @Around("logsta()")

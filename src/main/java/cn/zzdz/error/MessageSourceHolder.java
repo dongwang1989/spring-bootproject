@@ -6,6 +6,7 @@ public class MessageSourceHolder {
     private static MessageSource messageSource;
 
     public static MessageSource getMessageSource() {
+        System.out.println(messageSource);
         return messageSource;
     }
 

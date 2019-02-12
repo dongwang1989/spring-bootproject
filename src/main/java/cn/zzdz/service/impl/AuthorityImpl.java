@@ -3,12 +3,12 @@ package cn.zzdz.service.impl;
 import org.springframework.security.core.GrantedAuthority;
 
 public class AuthorityImpl implements GrantedAuthority {
-	private String permission;
+	private Object permission;
 
 	/**
 	 *
 	 */
-	public AuthorityImpl(String permission) {
+	public AuthorityImpl(Object permission) {
 		this.permission = permission;
 	}
 
@@ -16,7 +16,7 @@ public class AuthorityImpl implements GrantedAuthority {
 
 	@Override
 	public String getAuthority() {
-		return permission;
+		return permission.toString();
 	}
 
 }

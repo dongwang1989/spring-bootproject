@@ -10,6 +10,8 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import cn.zzdz.annotation.IReturnEntityColum;
+import cn.zzdz.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,6 +29,7 @@ import cn.zzdz.interfaces.service.ICarfin;
 public class CarfinImpl implements ICarfin {
 	@Autowired
 	private CarfinJpa jpa;
+
 
 	@Override
 	public CarfinDto getall(CarfinDto param) {

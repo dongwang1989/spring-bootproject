@@ -22,7 +22,6 @@ import java.util.concurrent.TimeUnit;
 @EnableSwagger2
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class WebMvcConfiguration implements WebMvcConfigurer {
-
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 
@@ -47,5 +46,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	public LocaleResolver localeResolver() {
 		return new MyLocaleResolver();
 	}
+
 
 }

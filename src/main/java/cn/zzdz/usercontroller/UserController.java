@@ -1,25 +1,30 @@
 package cn.zzdz.usercontroller;
 
+import cn.zzdz.Convert.ConverterUtil;
 import cn.zzdz.annotation.IReturnEntityColum;
 import cn.zzdz.annotation.Ipassword;
+import cn.zzdz.annotation.JsonFieldFilter;
 import cn.zzdz.domain.User;
+import cn.zzdz.domain.User_;
 import cn.zzdz.dto.ResultDto;
 import cn.zzdz.dto.UserDto;
 import cn.zzdz.enums.ErrorMessage;
+import cn.zzdz.enums.UserStatus;
 import cn.zzdz.enums.UserType;
 import cn.zzdz.error.EnumError;
 import cn.zzdz.error.Error;
 import cn.zzdz.interfaces.service.IUserService;
 import cn.zzdz.permission.IPermission;
-import cn.zzdz.service.impl.UserServiceImpl;
 import cn.zzdz.service.impl.mapppertest;
 import cn.zzdz.test.Test;
 import cn.zzdz.valid.interfaces.Add;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
+import io.swagger.annotations.*;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -28,11 +33,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -41,12 +45,13 @@ import java.util.Set;
 
 @Service
 @RestController
-public class UserController {
+@Api(tags="swaggerTestController相关api")
+public class UserController  {
     @Autowired // 如果用set方法加AutoWired那么他会自动给你把这个对象调用的地方都改过来。
     private IUserService userService;
 
-     @Autowired
-     private mapppertest hhh;
+    @Autowired
+    private mapppertest hhh;
 
     @PostMapping("/login") // (value="/login", method = RequestMethod.POST, consumes = "application/json")
     public ResultDto log(@RequestBody UserDto userdtolog, HttpSession session) {
@@ -54,8 +59,9 @@ public class UserController {
         return userService.getUser(userdtolog, session);
     }
 
+
     @RequestMapping("/denglu")
-    public String denglu( @RequestParam String username, @RequestParam String pwd, HttpSession session) {
+    public String denglu(@RequestParam String username, @RequestParam String pwd, HttpSession session) {
         System.out.println(username);
         return userService.denglu(username, pwd, session);
     }
@@ -158,22 +164,25 @@ public class UserController {
     public void getae() {
         System.out.println(UserType.ADMIN.getMessage());
     }
+
     @RequestMapping("/test/hib")
     public void hib() {
-         userService.ddd();
+        userService.ddd();
     }
+
     @GetMapping("test/validate1")
     @ResponseBody
     public String validate1(
 
-            @Size(min = 1,max = 10,message = "姓名长度必须为1到10")@RequestParam("name") String name,
-            @Min(value = 10,message = "年龄最小为10")@Max(value = 100,message = "年龄最大为100") @RequestParam("age") Integer age//,
+            @Size(min = 1, max = 10, message = "姓名长度必须为1到10") @RequestParam("name") String name,
+            @Min(value = 10, message = "年龄最小为10") @Max(value = 100, message = "年龄最大为100") @RequestParam("age") Integer age//,
             //@Future @RequestParam("birth")@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss") Date birth
-            ){
+    ) {
         return "validate1";
     }
+
     @RequestMapping("test/finduserbypage")
-    public void   finduserbypage(){
+    public void finduserbypage() {
         UserDto userdto = new UserDto();
         userdto.setSex("1");
         //UserServiceImpl h = new UserServiceImpl();
@@ -182,28 +191,82 @@ public class UserController {
 //        user.setPageSize(10);
         userService.finduserbypage(userdto);
     }
+
     @RequestMapping("test/22")
-    public @Validated(value={Add.class})User   test22(){
+    public @Validated(value = {Add.class})
+    User test22() {
         User user = userService.test();
         return user;
     }
-
+    @ApiOperation(value = "根据id查询学生的信息",notes = "查询数据库中某个学生的信息")
     @RequestMapping("/test/33")
-    @IReturnEntityColum(clazz = User.class,value = {"id","name"})
-    public   User test33(){
-        User user=new User();
+    //@JsonFieldFilter(type = User.class,exclude = "age")
+    //@IReturnEntityColum(clazz = User.class, value = {"id", "name"})
+    public User test33() {
+
+        User user = new User();
         user.setId(1);
         user.setName("张三");
         user.setSex("难");
         return user;
     }
+
     @RequestMapping("/test/55")
-    public  void test55(@Validated({Add.class}) User user){
+    public void test55(@Validated(value = {Add.class}) User user) {
+        System.out.println(UserStatus.ACTIVE.getMessage());
 
     }
+
     @RequestMapping("/test/66")
-    public  void test66(String pwd){
-            System.out.println("pwd:"+pwd);
+    public void test66(String pwd) {
+        System.out.println("pwd:" + pwd);
+    }
+
+    @RequestMapping("/test/77")
+    public void test77() {
+        User user = new User();
+        user.setId(1);
+        user.setName("张三");
+        user.setSex("难");
+        UserDto uerdto = new UserDto();
+        String[] str = {"id,", "name"};
+        ConverterUtil.transalte2(user, uerdto, str);
+    }
+
+    public static void readExcel(String excelName) throws IOException {
+
+        //将文件读入
+        InputStream in = new FileInputStream(new File("/"));
+        //创建工作簿
+        XSSFWorkbook wb = new XSSFWorkbook(in);
+        //读取第一个sheet
+        Sheet sheet = wb.getSheetAt(0);
+        //获取第二行
+
+        //循环读取科目
+        for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+
+            Row row = sheet.getRow(i);
+            for (int j = 0; j < 6; j++) {
+                System.out.println(row.getCell(j));
+            }
+
+        }
+    }
+
+    @RequestMapping("/test/88")
+    public void test88(HttpSession cc) {
+        System.out.println("tt:" + cc.getId());
+        cc.setAttribute(cc.getId(), "123");
+    }
+
+    @RequestMapping("/test/99")
+    public void test99(HttpSession cc) {
+        System.out.println("tt:" + cc.getAttribute("username"));
+    }
+    @RequestMapping("test/00")
+    public void test00(){
+        System.out.println(User_.id.getName());
     }
 
 

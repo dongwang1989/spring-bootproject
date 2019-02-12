@@ -1,5 +1,6 @@
 package cn.zzdz.config;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.context.SecurityContextRepository;
 
 import cn.zzdz.repository.ContentRepository;
+
 
 
 @Configuration
@@ -21,13 +23,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/", "/whoim2", "/hello/{param}", "/login", "/whoim", "/exception/{param}",
 						"/GET/environment", "/ha", "/a.html", "/new/**", "/denglu","/cas/**")
 				.permitAll().anyRequest().authenticated().and().csrf().disable();
+
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {// 如果是完全不受限制用这个，连解析都不解析，上面那个会做安全验证但是检查完不做限制
 		System.out.println("WebSecurityConfig2");
 		web.ignoring().antMatchers("/whoim2", "/favicon.ico", "/webjars/**", "/swagger-resources/**",
-				"/swagger-ui.html", "2/api-docs/**", "/GET/environment", "/ha", "/a.html", "/static/**", "/new/**",
+				"/swagger-ui.html", "/v2/api-docs/**", "/GET/environment", "/ha", "/a.html", "/static/**", "/new/**",
 				"/denglu","/exception/{param}","/test/**");
 		// "/cas/**", "/denglu", "/police/**", "/car/**", "/carin/**", "/carfin/**"
 	}
@@ -36,6 +39,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public SecurityContextRepository createsecurity() {
 		return new ContentRepository();
 	}
+
+
+
+
+
+
+
+
+
 	// @Autowired
 	// public void configureGlobal(AuthenticationManagerBuilder auth) throws
 	// Exception {
