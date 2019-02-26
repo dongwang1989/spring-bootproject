@@ -2,10 +2,10 @@ args:
   environment: none
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/newwd?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=PRC&useSSL=false
-    username: root
-    password: wd123.com
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://172.16.100.41:3306/farmuniver?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=PRC&useSSL=false
+      username: root
+      password: 123456
   mvc:
     view:
       prefix: /WEB-INF/jsp/
@@ -34,6 +34,8 @@ spring:
     hibernate.ddl-auto: none
     hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
+
+
   profiles:
     active: @profileActive@
   messages:

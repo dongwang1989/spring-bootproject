@@ -6,6 +6,16 @@ args:
      url: jdbc:mysql://localhost:3306/newwd?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=PRC&useSSL=false
      username: root
      password: wd123.com
+     db1:
+       driver-class-name: com.mysql.jdbc.Driver
+       url: jdbc:mysql://localhost:3306/newwd?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=PRC&useSSL=false
+       username: root
+       password: wd123.com
+     db2:
+       driver-class-name: com.mysql.jdbc.Driver
+       url: jdbc:mysql://localhost:3306/newwd?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=PRC&useSSL=false
+       username: root
+       password: wd123.com
 
    jpa:
      database: MYSQL

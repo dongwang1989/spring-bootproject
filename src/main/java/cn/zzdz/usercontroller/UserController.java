@@ -38,10 +38,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RestController
@@ -52,6 +49,7 @@ public class UserController  {
 
     @Autowired
     private mapppertest hhh;
+
 
     @PostMapping("/login") // (value="/login", method = RequestMethod.POST, consumes = "application/json")
     public ResultDto log(@RequestBody UserDto userdtolog, HttpSession session) {
@@ -267,6 +265,20 @@ public class UserController  {
     @RequestMapping("test/00")
     public void test00(){
         System.out.println(User_.id.getName());
+    }
+    @Autowired
+
+    @RequestMapping("test/mn")
+    public void testmn(){
+//        for (int j = 0; j < 10; j++) {
+//            int kk=j+1;
+//            System.out.println("kkk"+kk);
+//        }
+//        for (int c = 15; c < 17; c++) {
+//            int kk=c;
+//            System.out.println("kkk"+kk);
+//        }
+        hhh.cha();
     }
 
 

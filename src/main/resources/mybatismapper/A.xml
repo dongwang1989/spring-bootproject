@@ -24,5 +24,11 @@
         <if test="userstatus!=null">userstatus=#{userstatus}</if>
         where id=#{id}
     </update>
-
+<select id="cha" parameterType="java.util.Map" resultType="java.util.Map">
+    select * from School_Timetable where skzc=#{skzc}
+</select>
+    <insert id="adkcb" parameterType="java.util.Map">
+        insert into kbn (xn,xqh,jxlh,jash,djz,zj,kch,kcm,kxh,skjc,cxjc,skzc)values
+        (#{xn},#{xqh},#{jxlh},#{jash},#{djz},#{zj},#{kch},#{kcm},#{kxh},#{skjc},#{cxjc},#{skzc})
+    </insert>
 </mapper>
