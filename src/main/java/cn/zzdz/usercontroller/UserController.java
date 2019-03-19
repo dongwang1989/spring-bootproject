@@ -13,9 +13,9 @@ import cn.zzdz.enums.UserStatus;
 import cn.zzdz.enums.UserType;
 import cn.zzdz.error.EnumError;
 import cn.zzdz.error.Error;
+import cn.zzdz.hbase.HBaseUtils;
 import cn.zzdz.interfaces.service.IUserService;
 import cn.zzdz.permission.IPermission;
-import cn.zzdz.service.impl.mapppertest;
 import cn.zzdz.test.Test;
 import cn.zzdz.valid.interfaces.Add;
 import io.swagger.annotations.*;
@@ -25,6 +25,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -47,8 +48,7 @@ public class UserController  {
     @Autowired // 如果用set方法加AutoWired那么他会自动给你把这个对象调用的地方都改过来。
     private IUserService userService;
 
-    @Autowired
-    private mapppertest hhh;
+
 
 
     @PostMapping("/login") // (value="/login", method = RequestMethod.POST, consumes = "application/json")
@@ -257,29 +257,35 @@ public class UserController  {
         System.out.println("tt:" + cc.getId());
         cc.setAttribute(cc.getId(), "123");
     }
-
+    @Autowired
+    private HBaseUtils hBaseUtils;
+    @RequestMapping("test/hba")
+    public void hba() throws IOException {
+        String va= hBaseUtils.selectValue("licy","rowkey01","f1","col1");
+        System.out.println("wd:"+va);
+    }
     @RequestMapping("/test/99")
     public void test99(HttpSession cc) {
         System.out.println("tt:" + cc.getAttribute("username"));
+    }
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+    @RequestMapping("/test/ed")
+    public void tested() {
+        redisTemplate.opsForValue().set("aaa", "wd");
+        System.out.println("tt:" + redisTemplate.opsForValue().get("aaa"));
     }
     @RequestMapping("test/00")
     public void test00(){
         System.out.println(User_.id.getName());
     }
-    @Autowired
+    //@Autowired
 
     @RequestMapping("test/mn")
-    public void testmn(){
-//        for (int j = 0; j < 10; j++) {
-//            int kk=j+1;
-//            System.out.println("kkk"+kk);
-//        }
-//        for (int c = 15; c < 17; c++) {
-//            int kk=c;
-//            System.out.println("kkk"+kk);
-//        }
-        hhh.cha();
+    public void testmn(HttpSession ID){
+        System.out.println("wd:"+ID);
     }
+
 
 
 }
