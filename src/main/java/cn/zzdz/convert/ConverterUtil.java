@@ -1,4 +1,4 @@
-package cn.zzdz.Convert;
+package cn.zzdz.convert;
 
 
 import org.springframework.cglib.beans.BeanCopier;

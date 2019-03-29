@@ -1,13 +1,11 @@
 package cn.zzdz.usercontroller;
 
-import cn.zzdz.Convert.ConverterUtil;
-import cn.zzdz.annotation.IReturnEntityColum;
-import cn.zzdz.annotation.Ipassword;
-import cn.zzdz.annotation.JsonFieldFilter;
+import cn.zzdz.convert.ConverterUtil;
 import cn.zzdz.domain.User;
 import cn.zzdz.domain.User_;
 import cn.zzdz.dto.ResultDto;
 import cn.zzdz.dto.UserDto;
+import cn.zzdz.enums.DruidIp;
 import cn.zzdz.enums.ErrorMessage;
 import cn.zzdz.enums.UserStatus;
 import cn.zzdz.enums.UserType;
@@ -43,13 +41,17 @@ import java.util.*;
 
 @Service
 @RestController
-@Api(tags="swaggerTestController相关api")
-public class UserController  {
+@Api(tags = "swaggerTestController相关api")
+public class UserController {
     @Autowired // 如果用set方法加AutoWired那么他会自动给你把这个对象调用的地方都改过来。
     private IUserService userService;
 
 
-
+    @RequestMapping("/login2") // (value="/login", method = RequestMethod.POST, consumes = "application/json")
+    public ResultDto log(@RequestParam String username, @RequestParam String pwd, HttpSession session) {
+        System.out.println(username);
+        return userService.login(username, pwd, session);
+    }
 
     @PostMapping("/login") // (value="/login", method = RequestMethod.POST, consumes = "application/json")
     public ResultDto log(@RequestBody UserDto userdtolog, HttpSession session) {
@@ -196,8 +198,9 @@ public class UserController  {
         User user = userService.test();
         return user;
     }
-    @ApiOperation(value = "根据id查询学生的信息",notes = "查询数据库中某个学生的信息")
-    @RequestMapping("/test/33")
+
+    @ApiOperation(value = "根据id查询学生的信息", notes = "查询数据库中某个学生的信息")
+    @RequestMapping(value = "/test/33")
     //@JsonFieldFilter(type = User.class,exclude = "age")
     //@IReturnEntityColum(clazz = User.class, value = {"id", "name"})
     public User test33() {
@@ -257,35 +260,43 @@ public class UserController  {
         System.out.println("tt:" + cc.getId());
         cc.setAttribute(cc.getId(), "123");
     }
+
     @Autowired
     private HBaseUtils hBaseUtils;
+
     @RequestMapping("test/hba")
     public void hba() throws IOException {
-        String va= hBaseUtils.selectValue("licy","rowkey01","f1","col1");
-        System.out.println("wd:"+va);
+        String va = hBaseUtils.selectValue("licy", "rowkey01", "f1", "col1");
+        System.out.println("wd:" + va);
     }
+
     @RequestMapping("/test/99")
     public void test99(HttpSession cc) {
         System.out.println("tt:" + cc.getAttribute("username"));
     }
+
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+
     @RequestMapping("/test/ed")
     public void tested() {
         redisTemplate.opsForValue().set("aaa", "wd");
         System.out.println("tt:" + redisTemplate.opsForValue().get("aaa"));
     }
+
     @RequestMapping("test/00")
-    public void test00(){
+    public void test00() {
         System.out.println(User_.id.getName());
     }
-    //@Autowired
 
     @RequestMapping("test/mn")
-    public void testmn(HttpSession ID){
-        System.out.println("wd:"+ID);
+    public void testmn(HttpSession ID) {
+        System.out.println("wd:" + ID);
     }
-
-
+    @RequestMapping("test/nm")
+    public void nm() {
+        String aip= DruidIp.AllowIp.getMessage();
+        System.out.println(aip);
+    }
 
 }

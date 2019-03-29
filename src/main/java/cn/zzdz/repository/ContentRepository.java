@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.lang.String;
@@ -24,24 +25,25 @@ public class ContentRepository implements SecurityContextRepository {
 	@Autowired
 	private IUserService userService;
 	@Autowired
-	private RedisTemplate<Object,Object> redisTemplate;
+	private RedisTemplate<String,String> redisTemplate;
 
 	@Override
 	@Transactional
 	public SecurityContext loadContext(HttpRequestResponseHolder requestResponseHolder) {
-		System.out.println("ContentRepository");
+
 		HttpSession session = requestResponseHolder.getRequest().getSession();
+
 		SecurityContext getcontext;
-		if (session == null || session.getAttribute(session.getId()) == null) {
+		redisTemplate.opsForValue().get(session.getId().toString());
+		Object userid =redisTemplate.opsForValue().get(session.getId().toString());
+		if (session == null ||  userid== null) {
+			System.out.println("ContentRepository1");
 			getcontext = generateNewContext();
 		} else {
-			//System.out.println("333");
-			// Authenticatio 令牌存信息用
-			// Collections.emptyList();//kong list readonly not addd yanjinxiefa
-			// Collections.unmodifiableList(list)//set readonly not change quanjuyingyong
-			// userService
-			String userid = session.getAttribute(session.getId()).toString();
-			Set<Object> set =redisTemplate.opsForSet().members(userid);
+			System.out.println("ContentRepository");
+			//String userid =redisTemplate.opsForValue().get(session.getId()).toString();
+			Set<String> set= userService.getPermions(userid.toString());
+			//Set<Object> set =redisTemplate.opsForSet().members(userid);
 			/* Set<String> set = redisTemplate//userService.cafindUserInfoByuser(username); */
 			Set<AuthorityImpl> permissions = set.stream().map(auth -> new AuthorityImpl(auth))
 					.collect(Collectors.toSet());

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface IUserService {
-
+	public ResultDto login(String username, String pwd, HttpSession session);
 	public void finduserbypage(UserDto userdto);
 	public ResultDto getUser(UserDto userdto, HttpSession session);
 
@@ -37,4 +37,6 @@ public interface IUserService {
 	public void ddd();
 
 	public User test();
+	//@Cacheable(value = "permion", key = "#id")
+	public Set<String> getPermions(String id);
 }

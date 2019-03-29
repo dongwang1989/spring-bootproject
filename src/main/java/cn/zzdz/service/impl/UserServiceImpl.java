@@ -1,6 +1,5 @@
 package cn.zzdz.service.impl;
 
-import cn.zzdz.Convert.ConverterUtil;
 import cn.zzdz.dao.UserJpaRepository;
 import cn.zzdz.domain.User;
 import cn.zzdz.dto.ResultDto;
@@ -11,8 +10,8 @@ import cn.zzdz.error.Error;
 import cn.zzdz.interfaces.service.IUserService;
 import cn.zzdz.mapper.IUserMapper;
 import cn.zzdz.redismap.RedisUtils;
-import cn.zzdz.valid.interfaces.Add;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,14 +19,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -64,12 +59,30 @@ public class UserServiceImpl implements IUserService {
         }
         return resultDto;
     }
-
+    @Override
+    public ResultDto login(String username, String pwd, HttpSession session) {
+        ResultDto resultDto = new ResultDto();
+        Object userid = redisUtils.get(session.getId());//redisTemplate.opsForValue().get(session.getId());
+        if (userid != null && !userid.equals("")) {
+            resultDto.setResult("当前账号已经登陆！"+session.getId());
+        } else {
+            User user = userJpaRepository.getUser(username, pwd);
+            if (user != null) {
+                resultDto.setResult("登陆成功"+session.getId());
+                Integer h=user.getId();
+                redisUtils.set(session.getId(),h.toString(),1);
+                //redisTemplate.opsForValue().set(session.getId(),user.getId(),1, TimeUnit.HOURS);
+            } else {
+                throw new Error(ErrorMessage.INCORRECT_PASSWORD, user.getUsername());
+            }
+        }
+        return resultDto;
+    }
 
     @Override
     public ResultDto getUser(UserDto userDtolog, HttpSession session) {
         ResultDto resultDto = new ResultDto();
-        Object userid=redisTemplate.opsForValue().get(session.getId());
+        Object userid = redisTemplate.opsForValue().get(session.getId());
         //String sessionIdValue = session.getAttribute(session.getId()).toString();
         if (userid != null && !userid.equals("")) {
             resultDto.setResult("当前账号已经登陆！");
@@ -77,14 +90,14 @@ public class UserServiceImpl implements IUserService {
             User user = userJpaRepository.getUser(userDtolog.getUsername(), userDtolog.getPwd());
             if (user != null) {
                 resultDto.setResult("登陆成功");
-                redisTemplate.opsForValue().set(session.getId(),userid,1, TimeUnit.HOURS);
-                Set<String> setLit = user.getPermission();
-                if (setLit.size() > 0) {
-                    redisTemplate.opsForSet().add(userid,setLit);
-                    redisTemplate.expire(userid,1,TimeUnit.HOURS);
-                }
-            }
-            else {
+
+//                redisTemplate.opsForValue().set(session.getId(),userid,1, TimeUnit.HOURS);
+//                Set<String> setLit = user.getPermission();
+//                if (setLit.size() > 0) {
+//                    redisTemplate.opsForSet().add(userid,setLit);
+//                    redisTemplate.expire(userid,1,TimeUnit.HOURS);
+//                }
+            } else {
                 throw new Error(ErrorMessage.INCORRECT_PASSWORD, user.getUsername());
             }
 
@@ -92,6 +105,18 @@ public class UserServiceImpl implements IUserService {
         return resultDto;
     }
 
+
+    @Override
+    @Cacheable(value = "permion", key = "#id")
+    public Set<String> getPermions(String id) {
+        System.out.println("///");
+        Map<String,Object> map=new HashMap<>();
+        map.put("userid",id);
+
+        Set<String> perset = mapper.getper(map);
+        System.out.println("ddaaa:"+perset.size());
+        return perset;
+    }
     @Override
     public void ddd() {
         UserDto userDto = new UserDto();
@@ -122,7 +147,6 @@ public class UserServiceImpl implements IUserService {
             userDto.setAge(user.getAge());
             userDto.setSex(user.getSex());
             userDto.setUsername(user.getUsername());
-            //System.out.println("ddd:"+user.getUserstatus());
             userDto.setPwd("***");
         }
         return userDto;

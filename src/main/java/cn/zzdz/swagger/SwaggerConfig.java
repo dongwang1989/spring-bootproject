@@ -18,7 +18,7 @@ public class SwaggerConfig {
     public Docket docket(){
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
 //                   当前包路径
-                .apis(RequestHandlerSelectors.basePackage("cn.zzdz.ccc"))
+                .apis(RequestHandlerSelectors.basePackage("cn.zzdz.usercontroller"))
                 .paths(PathSelectors.any()).build();
 
     }

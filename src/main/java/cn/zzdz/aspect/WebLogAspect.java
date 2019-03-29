@@ -76,7 +76,7 @@ public class WebLogAspect {
 
 	@AfterReturning("webLog()")
 	public void doAfterReturning(JoinPoint joinPoint) {
-		System.out.println("re");
+		//System.out.println("re");
 		// 处理完请求，返回内容
 		logger.info("WebLogAspect.doAfterReturning()");
 
@@ -90,7 +90,7 @@ public class WebLogAspect {
 	@Around("webLog()")
 	 public Object aroundStatus(ProceedingJoinPoint pjp) throws Throwable {
 		Object proceed;
-		System.out.println("这是环绕通知之前的部分!!"); // 获取将要执行的方法名称 String
+		//System.out.println("这是环绕通知之前的部分!!"); // 获取将要执行的方法名称 String
 	    //String methodName = pjp.getSignature().getName();
 	 	if(true){
 
@@ -99,7 +99,7 @@ public class WebLogAspect {
 	 	else {
 			proceed="500";
 		}
-		System.out.println("这是环绕通知之后的部分!!");
+		//System.out.println("这是环绕通知之后的部分!!");
 	 	return proceed;
 	}
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -18,6 +19,9 @@ public class RedisUtils {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate2;
+
     /**
      * 读取缓存
      *
@@ -31,10 +35,10 @@ public class RedisUtils {
     /**
      * 写入缓存
      */
-    public boolean set(final String key, String value) {
+    public boolean set(final String key, String value,int hour) {
         boolean result = false;
         try {
-            redisTemplate.opsForValue().set(key, value);
+            redisTemplate.opsForValue().set(key, value,hour, TimeUnit.HOURS);
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,6 +73,7 @@ public class RedisUtils {
         }
         return result;
     }
+
 }
 
 

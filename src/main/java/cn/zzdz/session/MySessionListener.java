@@ -17,7 +17,11 @@ public class MySessionListener implements HttpSessionListener {
 
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
-        System.out.println("xiaol"+se.getSession().getAttribute("username"));
-        //redisTemplate.delete(se.getSession().getAttribute("username"));
+
+        System.out.println("xiaol"+se.getSession().getId());
+        String userid="";
+        //删除权限
+        redisTemplate.delete(se.getSession().getId());
+
     }
 }

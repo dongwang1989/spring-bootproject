@@ -4,7 +4,7 @@ import cn.zzdz.interfaces.enummessage.IMessage;
 
 public enum LookupType implements IMessage {
     USER_STATUS("STAT"), LOOKUP("LU"), Entity_CheckMessage("CheckMessage"),
-    USER_TYPE("TYPE"),Regular_Type("REGULAR");
+    USER_TYPE("TYPE"),Regular_Type("REGULAR"),Druid_Ip("Druid");
     private String name;
 
     private LookupType(String name) {
