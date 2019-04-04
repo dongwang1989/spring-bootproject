@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
@@ -60,18 +61,18 @@ public class UserServiceImpl implements IUserService {
         return resultDto;
     }
     @Override
-    public ResultDto login(String username, String pwd, HttpSession session) {
+    public ResultDto login(String username, String pwd, Cookie cook) {
         ResultDto resultDto = new ResultDto();
-        Object userid = redisUtils.get(session.getId());//redisTemplate.opsForValue().get(session.getId());
+        Object userid = redisUtils.get(cook.getValue());//redisTemplate.opsForValue().get(cook.getValue());
         if (userid != null && !userid.equals("")) {
-            resultDto.setResult("当前账号已经登陆！"+session.getId());
+            resultDto.setResult("当前账号已经登陆！"+cook.getValue());
         } else {
             User user = userJpaRepository.getUser(username, pwd);
             if (user != null) {
-                resultDto.setResult("登陆成功"+session.getId());
+                resultDto.setResult("登陆成功"+cook.getValue());
                 Integer h=user.getId();
-                redisUtils.set(session.getId(),h.toString(),1);
-                //redisTemplate.opsForValue().set(session.getId(),user.getId(),1, TimeUnit.HOURS);
+                redisUtils.set(cook.getValue(),h.toString(),1);
+                //redisTemplate.opsForValue().set(cook.getValue(),user.getId(),1, TimeUnit.HOURS);
             } else {
                 throw new Error(ErrorMessage.INCORRECT_PASSWORD, user.getUsername());
             }

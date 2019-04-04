@@ -4,12 +4,13 @@ import cn.zzdz.domain.User;
 import cn.zzdz.dto.ResultDto;
 import cn.zzdz.dto.UserDto;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Set;
 
 public interface IUserService {
-	public ResultDto login(String username, String pwd, HttpSession session);
+	public ResultDto login(String username, String pwd, Cookie cookie);
 	public void finduserbypage(UserDto userdto);
 	public ResultDto getUser(UserDto userdto, HttpSession session);
 

@@ -14,6 +14,7 @@ import cn.zzdz.error.Error;
 import cn.zzdz.hbase.HBaseUtils;
 import cn.zzdz.interfaces.service.IUserService;
 import cn.zzdz.permission.IPermission;
+import cn.zzdz.rabbitmq.HelloSender;
 import cn.zzdz.test.Test;
 import cn.zzdz.valid.interfaces.Add;
 import io.swagger.annotations.*;
@@ -28,8 +29,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Max;
@@ -48,9 +52,16 @@ public class UserController {
 
 
     @RequestMapping("/login2") // (value="/login", method = RequestMethod.POST, consumes = "application/json")
-    public ResultDto log(@RequestParam String username, @RequestParam String pwd, HttpSession session) {
-        System.out.println(username);
-        return userService.login(username, pwd, session);
+    public ResultDto log(@RequestParam String username, @RequestParam String pwd) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        Cookie [] cookies = request.getCookies();
+        Cookie cook=null;
+        for (Cookie c:cookies) {
+            if(c.getName().equals("JSESSIONID")) {
+                cook=c;
+            }
+        }
+        return userService.login(username, pwd, cook);
     }
 
     @PostMapping("/login") // (value="/login", method = RequestMethod.POST, consumes = "application/json")
@@ -293,10 +304,19 @@ public class UserController {
     public void testmn(HttpSession ID) {
         System.out.println("wd:" + ID);
     }
+    @Autowired
+    private HelloSender helloSender;
     @RequestMapping("test/nm")
     public void nm() {
-        String aip= DruidIp.AllowIp.getMessage();
-        System.out.println(aip);
+        helloSender.send();
+    }
+    @RequestMapping("test/nm2")
+    public void nm2(HttpServletRequest hq) {
+        for (Cookie c:hq.getCookies()) {
+            System.out.println(c.getName()+":"+c.getValue());
+            System.out.println(hq.getSession().getId());
+        }
+
     }
 
 }

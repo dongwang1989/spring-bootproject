@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpRequestResponseHolder;
 import org.springframework.security.web.context.SecurityContextRepository;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -32,16 +33,21 @@ public class ContentRepository implements SecurityContextRepository {
 	public SecurityContext loadContext(HttpRequestResponseHolder requestResponseHolder) {
 
 		HttpSession session = requestResponseHolder.getRequest().getSession();
-
+		Cookie cook=null;
+		for(Cookie c:requestResponseHolder.getRequest().getCookies()){
+			if(c.getName().equals("JSESSIONID")){
+				cook=c;
+			}
+		}
 		SecurityContext getcontext;
-		redisTemplate.opsForValue().get(session.getId().toString());
-		Object userid =redisTemplate.opsForValue().get(session.getId().toString());
+		redisTemplate.opsForValue().get(cook.getValue());
+		Object userid =redisTemplate.opsForValue().get(cook.getValue());
 		if (session == null ||  userid== null) {
 			System.out.println("ContentRepository1");
 			getcontext = generateNewContext();
 		} else {
 			System.out.println("ContentRepository");
-			//String userid =redisTemplate.opsForValue().get(session.getId()).toString();
+			//String userid =redisTemplate.opsForValue().get(cook.getValue()).toString();
 			Set<String> set= userService.getPermions(userid.toString());
 			//Set<Object> set =redisTemplate.opsForSet().members(userid);
 			/* Set<String> set = redisTemplate//userService.cafindUserInfoByuser(username); */
@@ -49,7 +55,7 @@ public class ContentRepository implements SecurityContextRepository {
 					.collect(Collectors.toSet());
 			getcontext = generateNewContext();
 			getcontext.setAuthentication(
-					new UsernamePasswordAuthenticationToken(session.getAttribute(session.getId()), "", permissions));
+					new UsernamePasswordAuthenticationToken(session.getAttribute(cook.getValue()), "", permissions));
 		}
 		return getcontext;
 	}
