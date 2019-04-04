@@ -80,7 +80,7 @@ hbase:
 server:
   error:
     path: /error
-  port: 8080
+  port: 8009
 #  servlet:
 #    session:
 #      timeout: PT5S
