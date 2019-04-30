@@ -19,24 +19,17 @@ import cn.zzdz.permission.IPermission;
 @Aspect
 @Order(1)
 public class PermissionAspect {
-	// /** 类上注解情形 */
-	// @Pointcut("execution(* cn.zzdz.usercontroller..*.*(..)) &&
-	// @within(cd.zzdz.permission.IPermission)")
-	// public void aspect2() {
-	//
-	// }
+
 
 	/** 方法上注解情形 */
 	@Pointcut(" @annotation(cn.zzdz.permission.IPermission)")
 	public void aspect() {
-
 	}
 
 	@Before("aspect() && @annotation(permission)")
 	public void getmethod(JoinPoint point, IPermission permission) throws Exception {
 		Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication()
 				.getAuthorities();
-		// Md5PasswordEncoder md5 = new Md5PasswordEncoder();
 
 		// 进行权限判断
 		boolean isEquals = false;

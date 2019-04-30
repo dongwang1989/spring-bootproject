@@ -49,7 +49,6 @@ public class UserServiceImpl implements IUserService {
             user.setPwd(user.getPwd());
             try {
                 User us = userJpaRepository.save(user);
-
                 System.out.println(us);
                 resultDto.setResult("1");
             } catch (Exception e) {

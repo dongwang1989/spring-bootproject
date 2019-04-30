@@ -32,7 +32,6 @@ public class ExceptionController extends AbstractErrorController {// extends Abs
     public @ResponseBody
     ResponseEntity<Map<String, Object>> error(HttpServletRequest request, Exception exception)
             throws Exception {
-
         Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
         statusCode = statusCode == null ? HttpStatus.INTERNAL_SERVER_ERROR.value() : statusCode;
         logger.error("code:" + statusCode + " " + "message:" + HttpStatus.valueOf(statusCode) + " " + "exception:" + exception.getMessage());

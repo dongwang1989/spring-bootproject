@@ -5,6 +5,7 @@ import com.github.tobato.fastdfs.domain.StorePath;
 import com.github.tobato.fastdfs.proto.storage.DownloadByteArray;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLEncoder;
 
 @Component
 public class FastDFSClient {
@@ -129,8 +133,26 @@ public class FastDFSClient {
         try {
             StorePath storePath = StorePath.praseFromUrl(fileUrl);
             byte[] bytes = fastFileStorageClient.downloadFile(storePath.getGroup(), storePath.getPath(), new DownloadByteArray());
+            String tycon=fileUrl.split(".")[fileUrl.split(".").length-1];
             FileOutputStream stream = new FileOutputStream(file);
             stream.write(bytes);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+    public static boolean downloadFile3(HttpServletResponse response,String fileUrl) {
+        try {
+            StorePath storePath = StorePath.praseFromUrl(fileUrl);
+            byte[] bytes = fastFileStorageClient.downloadFile(storePath.getGroup(), storePath.getPath(), new DownloadByteArray());
+
+            response.setCharacterEncoding("UTF-8");
+            response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode("test.jpg", "UTF-8"));
+
+            // 写出
+            ServletOutputStream outputStream = response.getOutputStream();
+            IOUtils.write(bytes, outputStream);
         } catch (Exception e) {
             log.error(e.getMessage());
             return false;

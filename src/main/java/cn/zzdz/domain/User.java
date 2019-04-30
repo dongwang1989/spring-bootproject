@@ -39,7 +39,7 @@ public class User implements Serializable {
     @Column(name = "name")
     //@NotEmpty
     private String name;
-    //@Min(value = 18, message = "年龄最小为18")
+    @Min(value = 18, message = "年龄最小为18")
     @Column(name = "age")
        //(groups = {Add.class})
     private int age;
@@ -64,6 +64,8 @@ public class User implements Serializable {
 
     @Column(name = "userstatus")
     private UserStatus userstatus;
+
+
 
     public UserStatus getUserstatus() {
         return userstatus;

@@ -4,7 +4,6 @@ import cn.zzdz.interfaces.service.IUserService;
 import cn.zzdz.service.impl.AuthorityImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.lang.String;
@@ -35,14 +33,15 @@ public class ContentRepository implements SecurityContextRepository {
 		HttpSession session = requestResponseHolder.getRequest().getSession();
 		Cookie cook=null;
 		for(Cookie c:requestResponseHolder.getRequest().getCookies()){
-			if(c.getName().equals("JSESSIONID")){
+			if(c.getName().equals("access_token")){
 				cook=c;
 			}
 		}
 		SecurityContext getcontext;
-		redisTemplate.opsForValue().get(cook.getValue());
+		//redisTemplate.opsForValue().get(cook.getValue());
 		Object userid =redisTemplate.opsForValue().get(cook.getValue());
-		if (session == null ||  userid== null) {
+		if (userid== null) {
+		//if (session == null ||  userid== null) {
 			System.out.println("ContentRepository1");
 			getcontext = generateNewContext();
 		} else {

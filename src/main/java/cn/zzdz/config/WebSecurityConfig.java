@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		System.out.println("WebSecurityConfig2");
 		web.ignoring().antMatchers("/whoim2", "/favicon.ico", "/webjars/**", "/swagger-resources/**",
 				"/swagger-ui.html", "/v2/api-docs/**", "/GET/environment", "/ha", "/a.html", "/static/**", "/new/**",
-				"/denglu","/exception/{param}","/test/**","/tet/**","/login2","/druid/**");
+				"/denglu","/exception/{param}","/test/**","/tet/**","/login2","/druid/**","/logind/**","/userdd/**");
 		// "/cas/**", "/denglu", "/police/**", "/car/**", "/carin/**", "/carfin/**"
 	}
 

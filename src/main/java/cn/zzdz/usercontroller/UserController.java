@@ -1,6 +1,7 @@
 package cn.zzdz.usercontroller;
 
 import cn.zzdz.convert.ConverterUtil;
+import cn.zzdz.domain.SysUser;
 import cn.zzdz.domain.User;
 import cn.zzdz.domain.User_;
 import cn.zzdz.dto.ResultDto;
@@ -12,6 +13,7 @@ import cn.zzdz.enums.UserType;
 import cn.zzdz.error.EnumError;
 import cn.zzdz.error.Error;
 import cn.zzdz.hbase.HBaseUtils;
+import cn.zzdz.interfaces.service.ILogin;
 import cn.zzdz.interfaces.service.IUserService;
 import cn.zzdz.permission.IPermission;
 import cn.zzdz.rabbitmq.HelloSender;
@@ -54,11 +56,11 @@ public class UserController {
     @RequestMapping("/login2") // (value="/login", method = RequestMethod.POST, consumes = "application/json")
     public ResultDto log(@RequestParam String username, @RequestParam String pwd) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        Cookie [] cookies = request.getCookies();
-        Cookie cook=null;
-        for (Cookie c:cookies) {
-            if(c.getName().equals("JSESSIONID")) {
-                cook=c;
+        Cookie[] cookies = request.getCookies();
+        Cookie cook = null;
+        for (Cookie c : cookies) {
+            if (c.getName().equals("JSESSIONID")) {
+                cook = c;
             }
         }
         return userService.login(username, pwd, cook);
@@ -184,10 +186,8 @@ public class UserController {
     @GetMapping("test/validate1")
     @ResponseBody
     public String validate1(
-
             @Size(min = 1, max = 10, message = "姓名长度必须为1到10") @RequestParam("name") String name,
             @Min(value = 10, message = "年龄最小为10") @Max(value = 100, message = "年龄最大为100") @RequestParam("age") Integer age//,
-            //@Future @RequestParam("birth")@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss") Date birth
     ) {
         return "validate1";
     }
@@ -304,18 +304,30 @@ public class UserController {
     public void testmn(HttpSession ID) {
         System.out.println("wd:" + ID);
     }
+
     @Autowired
     private HelloSender helloSender;
+
     @RequestMapping("test/nm")
     public void nm() {
         helloSender.send();
     }
+
     @RequestMapping("test/nm2")
     public void nm2(HttpServletRequest hq) {
-        for (Cookie c:hq.getCookies()) {
-            System.out.println(c.getName()+":"+c.getValue());
+        for (Cookie c : hq.getCookies()) {
+            System.out.println(c.getName() + ":" + c.getValue());
             System.out.println(hq.getSession().getId());
+            int i = 0;
+
         }
+    }
+    @Autowired
+    private ILogin user;
+
+    @IPermission("sys:aduser")
+    @RequestMapping("/aduser")
+    public void adUser(@Validated(value = {Add.class}) SysUser user){
 
     }
 

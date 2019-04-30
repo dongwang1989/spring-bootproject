@@ -1,8 +1,13 @@
 package cn.zzdz.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 系统用户
@@ -11,14 +16,15 @@ import java.util.List;
  * @email sunlightcs@gmail.com
  * @date 2016年9月18日 上午9:28:55
  */
-
+//@Entity
 public class SysUserEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 用户ID
 	 */
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
 
 	/**
@@ -54,11 +60,19 @@ public class SysUserEntity implements Serializable {
 	 */
 	private Integer status;
 
+	public Set<Long> getRoleIdList() {
+		return roleIdList;
+	}
+
+	public void setRoleIdList(Set<Long> roleIdList) {
+		this.roleIdList = roleIdList;
+	}
+
 	/**
 	 * 角色ID列表
 	 */
 
-	private List<Long> roleIdList;
+	private Set<Long> roleIdList;
 
 	/**
 	 * 创建者ID
@@ -202,13 +216,13 @@ public class SysUserEntity implements Serializable {
 		return createTime;
 	}
 
-	public List<Long> getRoleIdList() {
-		return roleIdList;
-	}
+//	public List<Long> getRoleIdList() {
+//		return roleIdList;
+//	}
 
-	public void setRoleIdList(List<Long> roleIdList) {
-		this.roleIdList = roleIdList;
-	}
+//	public void setRoleIdList(List<Long> roleIdList) {
+//		this.roleIdList = roleIdList;
+//	}
 
 	public Long getCreateUserId() {
 		return createUserId;
@@ -224,5 +238,16 @@ public class SysUserEntity implements Serializable {
 
 	public void setSalt(String salt) {
 		this.salt = salt;
+	}
+
+	private String id;
+
+	@Id
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }
