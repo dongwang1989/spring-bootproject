@@ -21,7 +21,7 @@ public class MySessionListener implements HttpSessionListener {
         System.out.println("xiaol"+se.getSession().getId());
         String userid="";
         //删除权限
-        redisTemplate.delete(se.getSession().getId());
+        //redisTemplate.delete(se.getSession().getId());
 
     }
 }

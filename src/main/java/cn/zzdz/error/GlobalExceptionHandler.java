@@ -2,6 +2,7 @@ package cn.zzdz.error;
 
 import cn.zzdz.dto.ExceptionDto;
 import org.apache.log4j.Logger;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

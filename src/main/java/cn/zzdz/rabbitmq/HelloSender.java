@@ -11,10 +11,10 @@ public class HelloSender {
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
-    public void send() {
+    public void send(int i) {
         String context = "hello " + new Date();
         System.out.println("Sender : " + context);
-        this.rabbitTemplate.convertAndSend("hello", context);
+        this.rabbitTemplate.convertAndSend("hello", context+i);
     }
 
 }

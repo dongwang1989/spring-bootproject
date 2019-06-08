@@ -19,16 +19,18 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
-@Api("登陆相关操作")
+@Api(tags = "登陆相关操作")
 @RequestMapping("/logind")
 public class Login {
     @Autowired
     private ILogin userService;
 
-    @ApiOperation(value = "登陆", httpMethod = "get", notes = "根据传过来的用户名和密码查询")
+    @ApiOperation(value = "登陆", httpMethod = "GET", notes = "根据传过来的用户名和密码查询")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", value = "用户名", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "pwd", value = "密码", required = true, dataType = "String", paramType = "query")
@@ -38,24 +40,25 @@ public class Login {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         Cookie[] cookies = request.getCookies();
         Cookie cook = null;
-        for (Cookie c : cookies) {
-            if (c.getName().equals("access_token")) {
-                cook = c;
+        if(cookies!=null) {
+            for (Cookie c : cookies) {
+                if (c.getName().equals("access_token")) {
+                    cook = c;
+                }
             }
         }
         Cookie cookie= userService.te(username, pwd, cook);
         response.addCookie(cookie);
     }
-    @RequestMapping("/bb")
-    public void bb(){
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        Cookie[] cookies = request.getCookies();
-        Cookie cook = null;
-        for (Cookie c : cookies) {
-            System.out.println(c.getName()+":"+c.getValue());
-        }
+    @ApiOperation(value = "获取用户权限", httpMethod = "GET", notes = "获取用户权限")
+    @ApiImplicitParam(name = "userId", value = "用户id", required = true, dataType = "int")
+    @RequestMapping(value = "/getUserPermion", method = RequestMethod.GET)
+    public Set<String> getUserPermion(Integer userId){
+       Set<String> lPermion= userService.getPermions(userId);
+       return  lPermion;
     }
-    @ApiOperation(value = "登出", httpMethod = "get", notes = "根据传过来的用户名和密码查询")
+
+    @ApiOperation(value = "登出", httpMethod = "GET", notes = "根据传过来的用户名和密码查询")
     @RequestMapping(value = "/loginout", method = RequestMethod.GET)
     public void loginout(HttpServletResponse response) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
@@ -70,9 +73,4 @@ public class Login {
         response.addCookie(cookie);
     }
 
-    @Test
-    public void login22() {
-        System.out.println("123");
-        //userService.te("admin", "admin");
-    }
 }

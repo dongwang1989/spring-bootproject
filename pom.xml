@@ -34,6 +34,38 @@
             <version>3.15</version>
         </dependency>
 
+<!--elasticsearch-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->
+<!--&lt;!&ndash;           <version>2.1.4.RELEASE</version>&ndash;&gt;-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>net.java.dev.jna</groupId>-->
+<!--            <artifactId>jna</artifactId>-->
+<!--            <version>4.5.1</version>-->
+<!--        </dependency>-->
+        <!--spring整合elasticsearch包-->
+
+
+
+<!--        <dependency>-->
+<!--            <groupId>org.elasticsearch</groupId>-->
+<!--            <artifactId>elasticsearch</artifactId>-->
+<!--            <version>5.6.3</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.elasticsearch.client</groupId>-->
+<!--            <artifactId>transport</artifactId>-->
+<!--            <version>5.6.3</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.elasticsearch.plugin/transport-netty4-client &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.elasticsearch.plugin</groupId>-->
+<!--            <artifactId>transport-netty4-client</artifactId>-->
+<!--            <version>5.6.3</version>-->
+<!--        </dependency>-->
+        <!--sdfdsf-->
 
         <dependency>
             <groupId>org.rosuda.REngine</groupId>
@@ -73,7 +105,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
         <!-- fastdf  -->
         <dependency>
             <groupId>com.github.tobato</groupId>
@@ -138,11 +169,43 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.mybatis.spring.boot</groupId>-->
-            <!--<artifactId>mybatis-spring-boot-starter</artifactId>-->
-            <!--<version>1.3.2</version>-->
-        <!--</dependency>-->
+        <!--打开摄像头-->
+        		<dependency>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>javacv-platform</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
+
+<!--        &lt;!&ndash;spring整合elasticsearch包&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.elasticsearch</groupId>-->
+<!--            <artifactId>elasticsearch</artifactId>-->
+<!--            <version>5.6.12</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.elasticsearch.client</groupId>-->
+<!--            <artifactId>transport</artifactId>-->
+<!--            <version>5.6.12</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.elasticsearch.plugin</groupId>-->
+<!--            <artifactId>transport-netty4-client</artifactId>-->
+<!--            <version>5.6.12</version>-->
+<!--        </dependency>-->
+        <!--引入ELasticSearch的依赖包，默认使用elasticsearch5.6.10版本-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+            <version>2.1.4.RELEASE</version>
+        </dependency>
+        <!--需要引入transport-netty3-client，否则会启动报错-->
+        <dependency>
+            <groupId>org.elasticsearch.plugin</groupId>
+            <artifactId>transport-netty3-client</artifactId>
+            <version>5.6.12</version>
+        </dependency>
+
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -151,6 +214,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>2.1.4.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -223,6 +287,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <!-- rabbitmq -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

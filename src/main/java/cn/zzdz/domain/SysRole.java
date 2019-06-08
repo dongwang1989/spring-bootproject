@@ -28,7 +28,6 @@ public class SysRole implements Serializable {
 	@Column(name = "role_id")
 	private Long roleId;
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "create_time")
 	private Date createTime;
 
@@ -40,8 +39,7 @@ public class SysRole implements Serializable {
 	@Column(name = "role_name")
 	private String roleName;
 
-	public SysRole() {
-	}
+
 
 	public Long getRoleId() {
 		return this.roleId;

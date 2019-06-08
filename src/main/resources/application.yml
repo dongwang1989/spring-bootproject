@@ -3,10 +3,26 @@ args:
 spring:
   datasource:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://172.16.100.41:3306/farmuniver?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=PRC&useSSL=false
+      url: jdbc:mysql://localhost:3306/newwd?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=PRC&useSSL=false
       username: root
-      password: 123456
+      password: wd123.com
     ######################### Druid连接池的配置信息  ##############
+# elasticsearch集群名称，默认的是elasticsearch
+        ##  data:
+        ##      elasticsearch:
+        ##        cluster-name: docker-cluster
+        ##    #节点的地址 注意api模式下端口号是9300，千万不要写成9200
+        ##        cluster-nodes: 172.16.100.81:9300
+        ##    #是否开启本地存储
+    ##        repositories:
+    ##              enable: true
+#  data:
+#    elasticsearch:
+#      cluster-name: elasticsearch-cluster
+#      cluster-nodes: 172.16.100.41:9300,172.16.100.43:9300,172.16.100.81:9300
+#      local: true
+#      repositories:
+#        enabled: true
   druid:
       initialSize: 5                                 #初始化连接大小
       minIdle: 5                                     #最小连接池数量
@@ -25,29 +41,34 @@ spring:
   application:
       name: spirng-boot-rabbitmq
   rabbitmq:
-      host: 172.16.100.43
+      host: 172.16.100.57
       port: 5672
-      username: guest
-      password: guest
+      username: admin
+      password: admin
   mvc:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
   ##单服务器
   redis:
-    cluster:
-      nodes: 172.16.100.43:6380,172.16.100.43:6381,172.16.100.43:6382,172.16.100.43:6383,172.16.100.43:6384,172.16.100.43:6385
-  ## 连接池最大连接数（使用负值表示没有限制）
-    jedis:
-      pool:
-        max-active: 300
-        ## 连接池最大阻塞等待时间（使用负值表示没有限制）
-        max-wait: -1
-        ## 连接池中的最大空闲连接
-        max-idle: 100
-        ## 连接池中的最小空闲连接
-        min-idle: 20
-  ## Redis数据库索引(默认为0)
+    sentinel:
+      master: mymaster
+      nodes: 172.16.100.81:26379,172.16.100.80:26379
+#    ## 连接池最大连接数（使用负值表示没有限制）
+#    jedis:
+#      pool:
+#        max-active: 300
+#        ## 连接池最大阻塞等待时间（使用负值表示没有限制）
+#        max-wait: -1
+#        ## 连接池中的最大空闲连接
+#        max-idle: 100
+#        ## 连接池中的最小空闲连接
+#        min-idle: 20
+#    cluster:
+#      nodes:
+#
+#             - 172.16.100.81:6379
+    ## Redis数据库索引(默认为0)
     database: 0
 
   ## 连接超时时间（毫秒）
@@ -67,7 +88,11 @@ spring:
     encoding: UTF-8
     always-use-message-format: false
     fallback-to-system-locale: true
-
+    # 上传文件情况
+  servlet:
+    multipart:
+      max-file-size: 100MB # 最大支持文件大小
+      max-request-size: 100MB # 最大支持请求大小
 
 
 hbase:
@@ -100,12 +125,11 @@ mybatis:
 #  so-timeout: 1501
 #  connect-timeout: 2000
 #  tracker-list:
-#    -172.16.100.44:22122
+#    -172.16.100.81:22122
 # 分布式文件系统fastdfs配置
 fdfs:
   # socket连接超时时长
   soTimeout: 1500
-  # 连接tracker服务器超时时长
   connectTimeout: 600
   pool:
     # 从池中借出的对象的最大数目
@@ -118,12 +142,18 @@ fdfs:
     height: 150
   # 跟踪服务器tracker_server请求地址,支持多个，这里只有一个，如果有多个在下方加- x.x.x.x:port
   trackerList:
-    - 172.16.100.44:22122
+    - 172.16.100.59:22122
+    - 172.16.100.80:22122
   #
   # 存储服务器storage_server访问地址
-  web-server-url: http://172.16.100.44:8888/
-  spring:
-    http:
-      multipart:
-        max-file-size: 1000MB # 最大支持文件大小
-        max-request-size: 1000MB # 最大支持请求大小
+  web-server-url: http://172.16.100.56/
+
+#elk集群地址
+elasticsearch:
+  ip: 172.16.100.56,172.16.100.57,172.16.100.58
+  port: 9300
+  #集群名称
+  cluster:
+    name: elasticsearch-cluster
+  #连接池
+  pool: 5

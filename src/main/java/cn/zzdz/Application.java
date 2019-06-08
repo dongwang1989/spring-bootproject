@@ -23,6 +23,7 @@ import cn.zzdz.config.WebMvcConfiguration;
 @EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
 public class Application extends WebMvcConfiguration {
     public static void main(String[] args) {
+        System.setProperty("es.set.netty.runtime.available.processors", "false");
         SpringApplication.run(Application.class, args);
     }
 

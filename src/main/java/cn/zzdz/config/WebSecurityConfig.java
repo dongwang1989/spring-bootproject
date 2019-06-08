@@ -31,7 +31,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		System.out.println("WebSecurityConfig2");
 		web.ignoring().antMatchers("/whoim2", "/favicon.ico", "/webjars/**", "/swagger-resources/**",
 				"/swagger-ui.html", "/v2/api-docs/**", "/GET/environment", "/ha", "/a.html", "/static/**", "/new/**",
-				"/denglu","/exception/{param}","/test/**","/tet/**","/login2","/druid/**","/logind/**","/userdd/**");
+				"/denglu","/exception/{param}","/test/**","/login2","/druid/**",
+				"/role/**","/userdd/**","/logind/**","/userrole/**","/tet/**","/el/**");
 		// "/cas/**", "/denglu", "/police/**", "/car/**", "/carin/**", "/carfin/**"
 	}
 
@@ -39,15 +40,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public SecurityContextRepository createsecurity() {
 		return new ContentRepository();
 	}
-
-
-
-
-
-
-
-
-
 	// @Autowired
 	// public void configureGlobal(AuthenticationManagerBuilder auth) throws
 	// Exception {
@@ -57,5 +49,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * @Override protected void configure(AuthenticationManagerBuilder auth) throws
 	 * Exception { auth.authenticationProvider(provider); }
 	 */
-
 }

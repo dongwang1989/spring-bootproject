@@ -51,7 +51,7 @@ public @interface IHave {
             System.out.println("##########");
             boolean isMatch = false;
             if (StringChecker.isObjectNotEmpty(username)) {
-                List<SysUser> list = userservice.getUserByusername(username.toString());
+                List<SysUser> list = userservice.getUserByusername(username.toString(),1,10);
                 if (list == null || list.size() == 0) {
                     isMatch = true;
                 }

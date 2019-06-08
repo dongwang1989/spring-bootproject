@@ -1,57 +1,63 @@
-package com.sample;
+package cn.zzdz.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class SysDept {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private Integer parentid;
+    private String name;
+    private Integer ordernum;
+    private Integer delflag;
 
-  private long deptid;
-  private long parentid;
-  private String name;
-  private long ordernum;
-  private long delflag;
+    public Integer getDeptid() {
+        return id;
+    }
 
-
-  public long getDeptid() {
-    return deptid;
-  }
-
-  public void setDeptid(long deptid) {
-    this.deptid = deptid;
-  }
-
-
-  public long getParentid() {
-    return parentid;
-  }
-
-  public void setParentid(long parentid) {
-    this.parentid = parentid;
-  }
+    public void setDeptid(Integer id) {
+        this.id = id;
+    }
 
 
-  public String getName() {
-    return name;
-  }
+    public Integer getParentid() {
+        return parentid;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-
-  public long getOrdernum() {
-    return ordernum;
-  }
-
-  public void setOrdernum(long ordernum) {
-    this.ordernum = ordernum;
-  }
+    public void setParentid(Integer parentid) {
+        this.parentid = parentid;
+    }
 
 
-  public long getDelflag() {
-    return delflag;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setDelflag(long delflag) {
-    this.delflag = delflag;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public Integer getOrdernum() {
+        return ordernum;
+    }
+
+    public void setOrdernum(Integer ordernum) {
+        this.ordernum = ordernum;
+    }
+
+
+    public Integer getDelflag() {
+        return delflag;
+    }
+
+    public void setDelflag(Integer delflag) {
+        this.delflag = delflag;
+    }
+
 
 }

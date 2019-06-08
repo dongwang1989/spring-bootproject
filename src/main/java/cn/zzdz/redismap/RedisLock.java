@@ -22,12 +22,13 @@ public class RedisLock {
      * @param timeout 超时时间
      * @return
      */
-    public boolean lock(String key, long timeout){
+    public boolean lock(String key, String value){
 
-        String value = String.valueOf(timeout + System.currentTimeMillis());
+        //String value = String.valueOf(timeout + System.currentTimeMillis());
         if(stringRedisTemplate.opsForValue().setIfAbsent(key,value)){
             return true;
         }
+        
 
         //判断锁超时,防止死锁
         String currentValue = (String)stringRedisTemplate.opsForValue().get(key);

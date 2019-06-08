@@ -47,7 +47,7 @@ import java.util.*;
 
 @Service
 @RestController
-@Api(tags = "swaggerTestController相关api")
+//@Api(tags = "swaggerTestController相关api")
 public class UserController {
     @Autowired // 如果用set方法加AutoWired那么他会自动给你把这个对象调用的地方都改过来。
     private IUserService userService;
@@ -310,7 +310,7 @@ public class UserController {
 
     @RequestMapping("test/nm")
     public void nm() {
-        helloSender.send();
+        helloSender.send(1);
     }
 
     @RequestMapping("test/nm2")
