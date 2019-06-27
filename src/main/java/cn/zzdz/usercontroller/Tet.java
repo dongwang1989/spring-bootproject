@@ -191,6 +191,7 @@ public class Tet {
 
     @RequestMapping(value = "/ca", method = RequestMethod.GET)
     public void aa() {
+
         //for (int i = 0; i <3 ; i++) {
         helloSender.send(3);
         //}
@@ -300,7 +301,7 @@ public class Tet {
         System.out.println("reduce" + i + "aa" + ca);
         notify();
     }
-    @RequestMapping("/opena")
+    @Test
     public  void recordCamera()
             throws Exception, InterruptedException, org.bytedeco.javacv.FrameRecorder.Exception {
         String outputFile="rtmp://172.16.100.80:1935/stream/example";
@@ -324,7 +325,7 @@ public class Tet {
         long videoTS=0;
         CanvasFrame frame = new CanvasFrame("camera", CanvasFrame.getDefaultGamma() / grabber.getGamma());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setAlwaysOnTop(true);
+        frame.setAlwaysOnTop(true);//
         Frame rotatedFrame=converter.convert(grabbedImage);//不知道为什么这里不做转换就不能推到rtmp
         while (frame.isVisible() && (grabbedImage = converter.convert(grabber.grab())) != null) {
             rotatedFrame = converter.convert(grabbedImage);
