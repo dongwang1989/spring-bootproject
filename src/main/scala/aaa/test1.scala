@@ -1,6 +1,6 @@
 package aaa
 
-import net.bytebuddy.implementation.bind.annotation.Super
+
 
 
 object test1 {

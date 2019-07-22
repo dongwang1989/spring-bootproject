@@ -78,7 +78,13 @@ public class Tet {
 
     @RequestMapping("/c")
     public void gec(HttpServletResponse response) {
-        String[] bn = {"rBBkOlzkp42ACoMgAAMtk3_3ZEM164.jpg"};
+        String[] bn = {"ClgBYl0uqpCAOALdAJBH5vbiUU0944.jpg",
+                 "ClgBYl0mn9GAfRVTAJBH5vbiUU0991.jpg",
+                "ClgBYV0dwE2AZGxWAAMtk3_3ZEM177.jpg",
+                "ClgBYV0lj7CAF87gAAPpEkpyTYo099.jpg",
+                "ClgBYV0lj7SAbjF2AAPpEkpyTYo129.jpg",
+                "ClgBYV0Z5MWAf_lAABGFgUK4LA0462.jpg"
+                };
         for (String c : bn) {
             FastDFSClient.deleteFile("group1/M00/00/00/" + c);
         }
@@ -345,8 +351,5 @@ public class Tet {
 
     }
 
-    public void ha(){
-
-    }
 
 }

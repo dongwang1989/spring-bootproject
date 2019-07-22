@@ -420,4 +420,49 @@ public class Carfin implements Serializable {
 		this.vehicleTypeName = vehicleTypeName;
 	}
 
+    @Override
+    public String toString() {
+        return "Carfin{" +
+                "eventLogId='" + eventLogId + '\'' +
+                ", colorDepth=" + colorDepth +
+                ", createTime='" + createTime + '\'' +
+                ", detsceneId=" + detsceneId +
+                ", driveChan=" + driveChan +
+                ", entireBelieve=" + entireBelieve +
+                ", eventLevel=" + eventLevel +
+                ", eventLogSysCode='" + eventLogSysCode + '\'' +
+                ", eventName='" + eventName + '\'' +
+                ", eventState=" + eventState +
+                ", eventTypeName='" + eventTypeName + '\'' +
+                ", id=" + id +
+                ", illegalType=" + illegalType +
+                ", length=" + length +
+                ", license='" + license + '\'' +
+                ", licenseLen=" + licenseLen +
+                ", logoRecog=" + logoRecog +
+                ", logTxt='" + logTxt + '\'' +
+                ", myeventType=" + myeventType +
+                ", mytrigger=" + mytrigger +
+                ", picUrl1='" + picUrl1 + '\'' +
+                ", picUrl2='" + picUrl2 + '\'' +
+                ", platColor=" + platColor +
+                ", platColorName='" + platColorName + '\'' +
+                ", platType=" + platType +
+                ", platTypeName='" + platTypeName + '\'' +
+                ", regionSysCode='" + regionSysCode + '\'' +
+                ", sourceName='" + sourceName + '\'' +
+                ", sourceSysCode='" + sourceSysCode + '\'' +
+                ", sourceType=" + sourceType +
+                ", speed=" + speed +
+                ", startTime='" + startTime + '\'' +
+                ", stopTime='" + stopTime + '\'' +
+                ", subLogoRecog=" + subLogoRecog +
+                ", unitSysCode='" + unitSysCode + '\'' +
+                ", vehicleColor=" + vehicleColor +
+                ", vehicleColorName='" + vehicleColorName + '\'' +
+                ", vehicleIndex=" + vehicleIndex +
+                ", vehicleType=" + vehicleType +
+                ", vehicleTypeName='" + vehicleTypeName + '\'' +
+                '}';
+    }
 }

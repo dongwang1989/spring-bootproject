@@ -27,7 +27,7 @@ public class User implements Serializable {
      * EntityManager em = emf.createEntityManager(); Query query =
      * em.createNamedQuery("finduser_permission");//根据User实体中定义的命名查询
      * query.setParameter("name", "李坏"); List<User> users = query.getResultList();
-     */
+     */ 
     private static final long serialVersionUID = 1L;
     /**
      *

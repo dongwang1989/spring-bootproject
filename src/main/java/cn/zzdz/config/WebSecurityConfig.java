@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/whoim2", "/favicon.ico", "/webjars/**", "/swagger-resources/**",
 				"/swagger-ui.html", "/v2/api-docs/**", "/GET/environment", "/ha", "/a.html", "/static/**", "/new/**",
 				"/denglu","/exception/{param}","/test/**","/login2","/druid/**",
-				"/role/**","/userdd/**","/logind/**","/userrole/**","/tet/**","/el/**");
+				"/role/**","/userdd/**","/logind/**","/userrole/**","/tet/**","/el/**","/c");
 		// "/cas/**", "/denglu", "/police/**", "/car/**", "/carin/**", "/carfin/**"
 	}
 
