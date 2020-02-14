@@ -13,6 +13,12 @@ import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.FilenameUtils;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
@@ -42,6 +48,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import javax.swing.JFrame;
 
@@ -51,6 +58,8 @@ import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacpp.opencv_objdetect;
 import org.bytedeco.javacv.*;
 import org.bytedeco.javacv.FrameGrabber.Exception;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 //@Service
 @RestController
 //@Api("用户相关操作")
@@ -78,15 +87,39 @@ public class Tet {
 
     @RequestMapping("/c")
     public void gec(HttpServletResponse response) {
-        String[] bn = {"ClgBYl0uqpCAOALdAJBH5vbiUU0944.jpg",
-                 "ClgBYl0mn9GAfRVTAJBH5vbiUU0991.jpg",
-                "ClgBYV0dwE2AZGxWAAMtk3_3ZEM177.jpg",
-                "ClgBYV0lj7CAF87gAAPpEkpyTYo099.jpg",
-                "ClgBYV0lj7SAbjF2AAPpEkpyTYo129.jpg",
-                "ClgBYV0Z5MWAf_lAABGFgUK4LA0462.jpg"
+        String[] bn = {
+                "ClgBiF1-ADaABPuHAAPpEkpyTYo762.jpg"     ,"ClgBiF1-ADOAFHEpAAPpEkpyTYo453.jpg"    ,"ClgBiF1-ADWAXJfEAAPpEkpyTYo784.jpg"  ,"ClgBiF1-AJeANxN-AAPpEkpyTYo508.jpg"    ,"ClgBiF1-AJKAdpobAAPpEkpyTYo537.jpg"  ,"ClgBiF1-AJqAN8PrAAPpEkpyTYo893.jpg"
+                  ,"ClgBiF1-ADiAVAZNAAPpEkpyTYo346.jpg"    ,"ClgBiF1-ADOAFHEpAAPpEkpyTYo453.jpg"  ,"ClgBiF1-AI-AXrd-AAPpEkpyTYo550.jpg"    ,"ClgBiF1-AJeANxN-AAPpEkpyTYo508.jpg"  ,"ClgBiF1-AJKAE672AAPpEkpyTYo839.jpg"    ,"ClgBiF1-AJqAN8PrAAPpEkpyTYo893.jpg"
+                ,"ClgBiF1-ADaABQFwAAPpEkpyTYo378.jpg"    ,"ClgBiF1-ADiAVAZNAAPpEkpyTYo346.jpg"  ,"ClgBiF1-ADOAQjkTAAPpEkpyTYo376.jpg"    ,"ClgBiF1-AI-AXrd-AAPpEkpyTYo550.jpg"  ,"ClgBiF1-AJeAYXNhAAPpEkpyTYo788.jpg"    ,"ClgBiF1-AJKAE672AAPpEkpyTYo839.jpg"  ,"ClgBiF1-AJqAOkcuAAPpEkpyTYo037.jpg"
+                  ,"ClgBiF1-ADKAbfo9AAPpEkpyTYo560.jpg"    ,"ClgBiF1-ADOAQjkTAAPpEkpyTYo376.jpg"  ,"ClgBiF1-AJaAbecJAAPpEkpyTYo902.jpg"    ,"ClgBiF1-AJeAYXNhAAPpEkpyTYo788.jpg"  ,"ClgBiF1-AJKAJ34oAAPpEkpyTYo660.jpg"    ,"ClgBiF1-AJqAOkcuAAPpEkpyTYo037.jpg"
+                ,"ClgBiF1-ADaAC86oAAPpEkpyTYo667.jpg"    ,"ClgBiF1-ADKAbfo9AAPpEkpyTYo560.jpg"  ,"ClgBiF1-ADOAZcpNAAPpEkpyTYo030.jpg"    ,"ClgBiF1-AJaAbecJAAPpEkpyTYo902.jpg"  ,"ClgBiF1-AJeAZOaUAAPpEkpyTYo543.jpg"    ,"ClgBiF1-AJKAJ34oAAPpEkpyTYo660.jpg"  ,"ClgBiF1-AJqAP0SLAAPpEkpyTYo574.jpg"
+                 ,"ClgBiF1-ADKACFR7AAPpEkpyTYo926.jpg"    ,"ClgBiF1-ADOAZcpNAAPpEkpyTYo030.jpg"  ,"ClgBiF1-AJaAbtc_AAPpEkpyTYo746.jpg"    ,"ClgBiF1-AJeAZOaUAAPpEkpyTYo543.jpg"  ,"ClgBiF1-AJKAYarEAAPpEkpyTYo705.jpg"    ,"ClgBiF1-AJqAP0SLAAPpEkpyTYo574.jpg"
+                ,"ClgBiF1-ADaAP3Y_AAPpEkpyTYo423.jpg"    ,"ClgBiF1-ADKACFR7AAPpEkpyTYo926.jpg"  ,"ClgBiF1-ADqAAiDDAAPpEkpyTYo612.jpg"    ,"ClgBiF1-AJaAbtc_AAPpEkpyTYo746.jpg"  ,"ClgBiF1-AJGAbpCRAAPpEkpyTYo412.jpg"    ,"ClgBiF1-AJKAYarEAAPpEkpyTYo705.jpg"  ,"ClgBiF1-AJSACYp_AAPpEkpyTYo954.jpg"
+                  ,"ClgBiF1-ADKAft7wAAPpEkpyTYo140.jpg"    ,"ClgBiF1-ADqAAiDDAAPpEkpyTYo612.jpg"  ,"ClgBiF1-AJaAcf3CAAPpEkpyTYo854.jpg"    ,"ClgBiF1-AJGAbpCRAAPpEkpyTYo412.jpg"  ,"ClgBiF1-AJmACsXGAAPpEkpyTYo776.jpg"    ,"ClgBiF1-AJSACYp_AAPpEkpyTYo954.jpg"
+                ,"ClgBiF1-ADaAUyjuAAPpEkpyTYo154.jpg"    ,"ClgBiF1-ADKAft7wAAPpEkpyTYo140.jpg"  ,"ClgBiF1-ADqAbTuJAAPpEkpyTYo129.jpg"    ,"ClgBiF1-AJaAcf3CAAPpEkpyTYo854.jpg"  ,"ClgBiF1-AJGAEurIAAPpEkpyTYo172.jpg"    ,"ClgBiF1-AJmACsXGAAPpEkpyTYo776.jpg"  ,"ClgBiF1-AJSAXkVrAAPpEkpyTYo519.jpg"
+                  ,"ClgBiF1-ADKAVbJ7AAPpEkpyTYo991.jpg"    ,"ClgBiF1-ADqAbTuJAAPpEkpyTYo129.jpg"  ,"ClgBiF1-AJaAdWeGAAPpEkpyTYo721.jpg"    ,"ClgBiF1-AJGAEurIAAPpEkpyTYo172.jpg"  ,"ClgBiF1-AJmAE0_tAAPpEkpyTYo086.jpg"    ,"ClgBiF1-AJSAXkVrAAPpEkpyTYo519.jpg"
+                ,"ClgBiF1-ADeAAkq9AAPpEkpyTYo481.jpg"    ,"ClgBiF1-ADKAVbJ7AAPpEkpyTYo991.jpg"  ,"ClgBiF1-ADSAGkMeAAPpEkpyTYo192.jpg"    ,"ClgBiF1-AJaAdWeGAAPpEkpyTYo721.jpg"  ,"ClgBiF1-AJGAF5tMAAPpEkpyTYo529.jpg"    ,"ClgBiF1-AJmAE0_tAAPpEkpyTYo086.jpg"  ,"ClgBiF1-AJuAdbeqAAPpEkpyTYo813.jpg"
+                  ,"ClgBiF1-ADKAVotPAAPpEkpyTYo622.jpg"    ,"ClgBiF1-ADSAGkMeAAPpEkpyTYo192.jpg"  ,"ClgBiF1-AJaAfvstAAPpEkpyTYo793.jpg"    ,"ClgBiF1-AJGAF5tMAAPpEkpyTYo529.jpg"  ,"ClgBiF1-AJmAE63-AAPpEkpyTYo478.jpg"    ,"ClgBiF1-AJuAdbeqAAPpEkpyTYo813.jpg"
+                ,"ClgBiF1-ADeAfUZ7AAPpEkpyTYo981.jpg"    ,"ClgBiF1-ADKAVotPAAPpEkpyTYo622.jpg"  ,"ClgBiF1-ADSAJ1rvAAPpEkpyTYo636.jpg"    ,"ClgBiF1-AJaAfvstAAPpEkpyTYo793.jpg"  ,"ClgBiF1-AJGATIFfAAPpEkpyTYo213.jpg"    ,"ClgBiF1-AJmAE63-AAPpEkpyTYo478.jpg"  ,"ClgBiF1-AJuAMl5sAAPpEkpyTYo515.jpg"
+                 ,"ClgBiF1-ADKAX0aeAAPpEkpyTYo036.jpg"    ,"ClgBiF1-ADSAJ1rvAAPpEkpyTYo636.jpg"  ,"ClgBiF1-AJCAaj01AAPpEkpyTYo719.jpg"    ,"ClgBiF1-AJGATIFfAAPpEkpyTYo213.jpg"  ,"ClgBiF1-AJmAG9VuAAPpEkpyTYo880.jpg"    ,"ClgBiF1-AJuAMl5sAAPpEkpyTYo515.jpg"
+                ,"ClgBiF1-ADeAHcNoAAPpEkpyTYo996.jpg"    ,"ClgBiF1-ADKAX0aeAAPpEkpyTYo036.jpg"  ,"ClgBiF1-ADSAPJwuAAPpEkpyTYo837.jpg"    ,"ClgBiF1-AJCAaj01AAPpEkpyTYo719.jpg"  ,"ClgBiF1-AJGAUKXMAAPpEkpyTYo221.jpg"    ,"ClgBiF1-AJmAG9VuAAPpEkpyTYo880.jpg"  ,"ClgBiF1-AJuAOLHWAAPpEkpyTYo611.jpg"
+                  ,"ClgBiF1-ADmAAD5cAAPpEkpyTYo476.jpg"    ,"ClgBiF1-ADSAPJwuAAPpEkpyTYo837.jpg"  ,"ClgBiF1-AJCAb6UYAAPpEkpyTYo876.jpg"    ,"ClgBiF1-AJGAUKXMAAPpEkpyTYo221.jpg"  ,"ClgBiF1-AJmAZqvSAAPpEkpyTYo172.jpg"    ,"ClgBiF1-AJuAOLHWAAPpEkpyTYo611.jpg"
+                ,"ClgBiF1-ADeASoK-AAPpEkpyTYo746.jpg"    ,"ClgBiF1-ADmAAD5cAAPpEkpyTYo476.jpg"  ,"ClgBiF1-ADSAT-ZVAAPpEkpyTYo120.jpg"    ,"ClgBiF1-AJCAb6UYAAPpEkpyTYo876.jpg"  ,"ClgBiF1-AJiAamSdAAPpEkpyTYo411.jpg"    ,"ClgBiF1-AJmAZqvSAAPpEkpyTYo172.jpg"  ,"ClgBiF1-AJWAKuwrAAPpEkpyTYo356.jpg"
+                 ,"ClgBiF1-ADmACIzJAAPpEkpyTYo664.jpg"    ,"ClgBiF1-ADSAT-ZVAAPpEkpyTYo120.jpg"  ,"ClgBiF1-AJCAcA2bAAPpEkpyTYo861.jpg"    ,"ClgBiF1-AJiAamSdAAPpEkpyTYo411.jpg"  ,"ClgBiF1-AJOAIFqSAAPpEkpyTYo631.jpg"    ,"ClgBiF1-AJWAKuwrAAPpEkpyTYo356.jpg"
+                ,"ClgBiF1-ADeAWkZ-AAPpEkpyTYo060.jpg"    ,"ClgBiF1-ADmACIzJAAPpEkpyTYo664.jpg"  ,"ClgBiF1-ADSAVQd8AAPpEkpyTYo383.jpg"    ,"ClgBiF1-AJCAcA2bAAPpEkpyTYo861.jpg"  ,"ClgBiF1-AJiAG_GYAAPpEkpyTYo165.jpg"    ,"ClgBiF1-AJOAIFqSAAPpEkpyTYo631.jpg"  ,"ClgBiF1-AJWALqk2AAPpEkpyTYo788.jpg"
+                 ,"ClgBiF1-ADmAI0tXAAPpEkpyTYo651.jpg"    ,"ClgBiF1-ADSAVQd8AAPpEkpyTYo383.jpg"  ,"ClgBiF1-AJCAM9IIAAPpEkpyTYo873.jpg"    ,"ClgBiF1-AJiAG_GYAAPpEkpyTYo165.jpg"  ,"ClgBiF1-AJOALreBAAPpEkpyTYo087.jpg"    ,"ClgBiF1-AJWALqk2AAPpEkpyTYo788.jpg"
+                ,"ClgBiF1-ADGAM2s3AAPpEkpyTYo600.jpg"    ,"ClgBiF1-ADmAI0tXAAPpEkpyTYo651.jpg"  ,"ClgBiF1-ADWAevDbAAPpEkpyTYo357.jpg"    ,"ClgBiF1-AJCAM9IIAAPpEkpyTYo873.jpg"  ,"ClgBiF1-AJiAKuEFAAPpEkpyTYo860.jpg"    ,"ClgBiF1-AJOALreBAAPpEkpyTYo087.jpg"  ,"ClgBiF1-AJWAMtrwAAPpEkpyTYo204.jpg"
+                 ,"ClgBiF1-ADmAROujAAPpEkpyTYo802.jpg"    ,"ClgBiF1-ADWAevDbAAPpEkpyTYo357.jpg"  ,"ClgBiF1-AJCANfa_AAPpEkpyTYo534.jpg"    ,"ClgBiF1-AJiAKuEFAAPpEkpyTYo860.jpg"  ,"ClgBiF1-AJOAPbYbAAPpEkpyTYo676.jpg"    ,"ClgBiF1-AJWAMtrwAAPpEkpyTYo204.jpg"
+                ,"ClgBiF1-ADiAe-YZAAPpEkpyTYo631.jpg"    ,"ClgBiF1-ADmAROujAAPpEkpyTYo802.jpg"  ,"ClgBiF1-ADWAQFfkAAPpEkpyTYo944.jpg"    ,"ClgBiF1-AJCANfa_AAPpEkpyTYo534.jpg"  ,"ClgBiF1-AJiAZJ20AAPpEkpyTYo552.jpg"    ,"ClgBiF1-AJOAPbYbAAPpEkpyTYo676.jpg"  ,"ClgBiF1-AJWAR3uwAAPpEkpyTYo699.jpg"
+                 ,"ClgBiF1-ADmAU3u0AAPpEkpyTYo284.jpg"    ,"ClgBiF1-ADWAQFfkAAPpEkpyTYo944.jpg"  ,"ClgBiF1-AJCAU6iiAAPpEkpyTYo524.jpg"    ,"ClgBiF1-AJiAZJ20AAPpEkpyTYo552.jpg"  ,"ClgBiF1-AJOAWoCwAAPpEkpyTYo698.jpg"    ,"ClgBiF1-AJWAR3uwAAPpEkpyTYo699.jpg"
+                ,"ClgBiF1-ADiAJZlgAAPpEkpyTYo782.jpg"    ,"ClgBiF1-ADmAU3u0AAPpEkpyTYo284.jpg"  ,"ClgBiF1-ADWATkRQAAPpEkpyTYo544.jpg"    ,"ClgBiF1-AJCAU6iiAAPpEkpyTYo524.jpg"  ,"ClgBiF1-AJKACs44AAPpEkpyTYo750.jpg"    ,"ClgBiF1-AJOAWoCwAAPpEkpyTYo698.jpg"  ,"ClgBiF1-AJWATI6pAAPpEkpyTYo867.jpg"
+                 ,"ClgBiF1-ADOAbIosAAPpEkpyTYo735.jpg"    ,"ClgBiF1-ADWATkRQAAPpEkpyTYo544.jpg"  ,"ClgBiF1-AJeAeVf-AAPpEkpyTYo145.jpg"    ,"ClgBiF1-AJKACs44AAPpEkpyTYo750.jpg"  ,"ClgBiF1-AJqAcrqsAAPpEkpyTYo795.jpg"    ,"ClgBiF1-AJWATI6pAAPpEkpyTYo867.jpg"
+                ,"ClgBiF1-ADiANao7AAPpEkpyTYo481.jpg"    ,"ClgBiF1-ADOAbIosAAPpEkpyTYo735.jpg"  ,"ClgBiF1-ADWATz-bAAPpEkpyTYo432.jpg"    ,"ClgBiF1-AJeAeVf-AAPpEkpyTYo145.jpg"  ,"ClgBiF1-AJKACThUAAPpEkpyTYo116.jpg"    ,"ClgBiF1-AJqAcrqsAAPpEkpyTYo795.jpg"
+                 ,"ClgBiF1-ADOACybkAAPpEkpyTYo519.jpg"    ,"ClgBiF1-ADWATz-bAAPpEkpyTYo432.jpg"  ,"ClgBiF1-AJeAFuBFAAPpEkpyTYo999.jpg"    ,"ClgBiF1-AJKACThUAAPpEkpyTYo116.jpg"  ,"ClgBiF1-AJqADQgEAAPpEkpyTYo890.jpg"
+                ,"ClgBiF1-ADiAR1MHAAPpEkpyTYo117.jpg"    ,"ClgBiF1-ADOACybkAAPpEkpyTYo519.jpg"  ,"ClgBiF1-ADWAXJfEAAPpEkpyTYo784.jpg"    ,"ClgBiF1-AJeAFuBFAAPpEkpyTYo999.jpg"  ,"ClgBiF1-AJKAdpobAAPpEkpyTYo537.jpg"    ,"ClgBiF1-AJqADQgEAAPpEkpyTYo890.jpg"
                 };
         for (String c : bn) {
-            FastDFSClient.deleteFile("group1/M00/00/00/" + c);
+            FastDFSClient.deleteFile("group1/M00/00/01/" + c);
         }
     }
 
@@ -98,9 +131,9 @@ public class Tet {
 
     @Test
     public void ab() {
-        String[] bn = {"rBBkOVziAsWAdeDcABfC2uG9_-o960.pdf"};
+        String[] bn = {"ClgBYV191oyAUE9lAAPpEkpyTYo708.jpg"};
         for (String c : bn) {
-            FastDFSClient.deleteFile("group1/M00/00/00/" + c);
+            FastDFSClient.deleteFile("group1/M00/01/67/" + c);
         }
 
     }
@@ -349,6 +382,92 @@ public class Tet {
         recorder.release();
         grabber.stop();
 
+    }
+
+    @GetMapping(value = "/upload")
+    @ResponseBody
+    public String uploadExcel(HttpServletRequest request) throws java.lang.Exception {
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+
+        MultipartFile file = multipartRequest.getFile("/Users/wangdong/Downloads/ccc.xls");
+        if (file.isEmpty()) {
+            return "文件不能为空";
+        }
+        InputStream inputStream = file.getInputStream();
+        List<List<Object>> list = getBankListByExcel(inputStream, file.getOriginalFilename());
+        inputStream.close();
+
+        for (int i = 0; i < list.size(); i++) {
+            List<Object> lo = list.get(i);
+            //TODO 随意发挥
+            System.out.println(lo);
+
+        }
+        return "上传成功";
+    }
+
+    /**
+     * 处理上传的文件
+     *
+     * @param in
+     * @param fileName
+     * @return
+     * @throws java.lang.Exception
+     */
+    public List getBankListByExcel(InputStream in, String fileName) throws java.lang.Exception {
+        List list = new ArrayList<>();
+        //创建Excel工作薄
+        Workbook work = this.getWorkbook(in, fileName);
+        if (null == work) {
+            throw new java.lang.Exception("创建Excel工作薄为空！");
+        }
+        Sheet sheet = null;
+        Row row = null;
+        Cell cell = null;
+
+        for (int i = 0; i < work.getNumberOfSheets(); i++) {
+            sheet = work.getSheetAt(i);
+            if (sheet == null) {
+                continue;
+            }
+
+            for (int j = sheet.getFirstRowNum(); j <= sheet.getLastRowNum(); j++) {
+                row = sheet.getRow(j);
+                if (row == null || row.getFirstCellNum() == j) {
+                    continue;
+                }
+
+                List<Object> li = new ArrayList<>();
+                for (int y = row.getFirstCellNum(); y < row.getLastCellNum(); y++) {
+                    cell = row.getCell(y);
+                    li.add(cell);
+                }
+                list.add(li);
+            }
+        }
+        work.close();
+        return list;
+    }
+
+    /**
+     * 判断文件格式
+     *
+     * @param inStr
+     * @param fileName
+     * @return
+     * @throws java.lang.Exception
+     */
+    public Workbook getWorkbook(InputStream inStr, String fileName) throws java.lang.Exception {
+        Workbook workbook = null;
+        String fileType = fileName.substring(fileName.lastIndexOf("."));
+        if (".xls".equals(fileType)) {
+            workbook = new HSSFWorkbook(inStr);
+        } else if (".xlsx".equals(fileType)) {
+            workbook = new XSSFWorkbook(inStr);
+        } else {
+            throw new java.lang.Exception("请上传excel文件！");
+        }
+        return workbook;
     }
 
 

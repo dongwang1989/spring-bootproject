@@ -118,7 +118,7 @@ mybatis:
   #file: myLog.log
     #level:
     #org:
-    #hibernate: ERROR
+    #hibernate: ERRORv吧、
     #springframework:
   #web: DEBUG
 #fdfs:
@@ -142,13 +142,13 @@ fdfs:
     height: 150
   # 跟踪服务器tracker_server请求地址,支持多个，这里只有一个，如果有多个在下方加- x.x.x.x:port
   trackerList:
-    - 10.88.1.135:22122
+    - 172.16.100.75:22122
     #- 172.16.100.81:22122
     #- 10.88.1.94:22122
     #- 172.16.100.80:22122 group1/M00/00/00/ClgBYF0WuKWAN8kNAAMtk3_3ZEM153.jpg
   #
   # 存储服务器storage_server访问地址
-  web-server-url: http://10.88.1.98/
+  web-server-url: http://10.88.1.136/
 
 #elk集群地址
 elasticsearch:

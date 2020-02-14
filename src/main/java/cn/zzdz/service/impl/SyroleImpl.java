@@ -54,6 +54,7 @@ public class SyroleImpl implements ISyrole {
 
                 Predicate[] par = new Predicate[listpred.size()];
                 Predicate p = criteriaBuilder.and(listpred.toArray(par));
+
                 return p;
             }
         };

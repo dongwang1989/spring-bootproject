@@ -1,7 +1,6 @@
 package cn.zzdz.druid;
 
-import cn.zzdz.enums.DruidIp;
-import cn.zzdz.enums.LookupType;
+
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;

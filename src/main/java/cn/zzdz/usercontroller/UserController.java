@@ -1,6 +1,7 @@
 package cn.zzdz.usercontroller;
 
 import cn.zzdz.convert.ConverterUtil;
+import cn.zzdz.dao.UserRoleJpa;
 import cn.zzdz.domain.SysUser;
 import cn.zzdz.domain.User;
 import cn.zzdz.domain.User_;
@@ -233,6 +234,7 @@ public class UserController {
     public void test66(String pwd) {
         System.out.println("pwd:" + pwd);
     }
+
 
     @RequestMapping("/test/77")
     public void test77() {

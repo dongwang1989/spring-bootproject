@@ -20,7 +20,7 @@ public interface UserRoleJpa extends JpaSpecificationExecutor<Userrole>, JpaRepo
     public void  delByUserid(@Param("userid") Integer userid);
     @Modifying
     @Transactional
-    @Query("delete from Userrole es where es.userid = :userid and es.roleid= :roleid")
+    @Query(value = "delete from Userrole es where es.userid = :userid and es.roleid= :roleid")
     public void  delByUserAndRole(@Param("userid") Integer userid, @Param("roleid") Integer roleid);
 
 }

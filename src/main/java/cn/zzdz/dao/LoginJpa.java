@@ -20,4 +20,11 @@ public interface LoginJpa extends JpaSpecificationExecutor<SysUser>,  JpaReposit
     @Query(value="from SysUser u where u.username=:username")
     public List<SysUser> getUserByusername(@Param("username") String username);
 
+
+
+
+    
 }
+
+
+
